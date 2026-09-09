@@ -45,12 +45,33 @@ const listaDeStringsONull = {
 
 const stringONull = { anyOf: [{ type: "string" }, { type: "null" }] };
 
+// Encabezado del bloque de comida: antes era un texto fijo que armaba el backend siempre
+// igual ("Para comer fuimos con:" en todas las corridas). Pasó a ser una elección acotada del
+// modelo (enum, no texto libre) para que varíe entre corridas sin perder el control de que el
+// resultado sea siempre una de las frases aprobadas — ver DECISIONES.md capítulo 12.
+const encabezadoComidaONull = {
+  anyOf: [
+    {
+      type: "string",
+      enum: [
+        "Para comer fuimos con:",
+        "Nosotros probamos:",
+        "Para comer pedimos:",
+        "De entrada pedimos:",
+        "De principales pedimos:",
+      ],
+    },
+    { type: "null" },
+  ],
+};
+
 const OUTPUT_SCHEMA = {
   type: "object",
   properties: {
     emoji_tematico: { type: "string" },
     nombre_lugar: { type: "string" },
     apertura: { type: "string" },
+    encabezado_comida: encabezadoComidaONull,
     items_comida: listaDeItemsONull,
     items_bebida: listaDeItemsONull,
     postre: itemONull,
@@ -66,6 +87,7 @@ const OUTPUT_SCHEMA = {
     "emoji_tematico",
     "nombre_lugar",
     "apertura",
+    "encabezado_comida",
     "items_comida",
     "items_bebida",
     "postre",
@@ -160,7 +182,10 @@ function renderizarCopy(d) {
 
   if (d.items_comida && d.items_comida.length) {
     const lineas = d.items_comida.map((i) => `${i.emoji} ${i.item} (${i.precio})`);
-    bloques.push(`Para comer fuimos con:\n${lineas.join("\n")}`);
+    // Fallback defensivo: si el modelo no mandó encabezado_comida (no debería pasar, es
+    // required en el schema), no se rompe el render — se usa el texto original por defecto.
+    const encabezado = d.encabezado_comida || "Para comer fuimos con:";
+    bloques.push(`${encabezado}\n${lineas.join("\n")}`);
   }
 
   if (d.items_bebida && d.items_bebida.length) {

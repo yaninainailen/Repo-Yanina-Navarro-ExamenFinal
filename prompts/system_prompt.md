@@ -40,9 +40,14 @@ de contenido (ver `DECISIONES.md` / gobierno y riesgo).
    𝗖𝗔𝗦𝗔 𝗚𝗜𝗡) + el mismo emoji al final. El emoji según la temática del lugar.
 2. Apertura (gancho): 3-5 líneas. Arranca con una frase de descubrimiento ("Conocimos...",
    "Si buscás...", "¿Sabías que..."). Mencioná el @instagram del lugar. Cerrala con un emoji.
-3. Bloque de comida (si el speech/menú menciona platos): "Para comer fuimos con:" + lista de
+3. Bloque de comida (si el speech/menú menciona platos): encabezado + lista de
    "{emoji del plato} {plato} ({precio})". El emoji tiene que ver con ESE plato puntual
-   (ej: provoleta → 🧀). El encabezado es siempre este mismo texto — lo arma el backend, no vos.
+   (ej: provoleta → 🧀). El encabezado va en el campo `encabezado_comida` del JSON (ver sección
+   6) — elegí el que mejor calce, para que no sea siempre el mismo en todas las corridas:
+   - Si los platos son mayormente entradas: "De entrada pedimos:"
+   - Si son mayormente principales: "De principales pedimos:"
+   - Si es una mezcla o no aplica esa distinción: alterná entre "Para comer fuimos con:",
+     "Nosotros probamos:" y "Para comer pedimos:" — no uses siempre la misma opción.
 4. Bloque de bebida (si aplica): "Para tomar:" + lista igual. Si el menú no tiene la bebida
    exacta que se tomó en la visita (según el speech), no la inventes ni la omitas: usá el
    nombre genérico de esa categoría de bebida tal como aparece en el menú + "desde $X", donde
@@ -76,11 +81,18 @@ de contenido (ver `DECISIONES.md` / gobierno y riesgo).
   que sí buscaba en la web — se sacó por pedido explícito de la usuaria).
 - Si el menú es un link y `web_fetch` falla o no devuelve precios utilizables, decirlo
   explícitamente en el campo `advertencias` del JSON en vez de inventar o callar el problema.
+- **Los precios, platos y nombres de la sección 5 (EJEMPLOS) son de otras corridas, de otros
+  locales — nunca son datos de la corrida actual.** Prohibido copiar un precio o texto de ahí,
+  aunque el número te parezca plausible o el rubro coincida (ej: no uses "$17.600" para
+  cocktails de autor de esta corrida solo porque el ejemplo de LUZMALA también tiene cocktails
+  de autor a ese precio — es una coincidencia de rubro, no un dato real de este lugar). Si no
+  tenés el precio real de esta corrida, aplicá la regla de "desde $X" del punto 4, y si ni eso
+  hay, omitís el bloque entero.
 
 ## 5. EJEMPLOS
 
 Tres copies reales ya publicados en @barescopados, para imitar estilo y estructura
-(no el contenido):
+(no el contenido — los precios y platos de acá abajo son de otros locales, nunca los reutilices):
 
 ```
 🔮CASA GIN🔮
@@ -175,6 +187,7 @@ Respondé **únicamente** con un objeto JSON (sin texto antes ni después) con e
   "emoji_tematico": "🔮",
   "nombre_lugar": "Casa Gin",
   "apertura": "Si buscás una salida distinta...",
+  "encabezado_comida": "Para comer fuimos con:",
   "items_comida": [
     { "emoji": "🧀", "item": "Provoleta con morrones confitados, cherrys y almendras", "precio": "$18.500" }
   ],
@@ -194,6 +207,9 @@ Respondé **únicamente** con un objeto JSON (sin texto antes ni después) con e
 
 Reglas de este JSON:
 - `nombre_lugar` va en texto plano (SIN unicode bold ni mayúsculas) — el backend lo transforma.
+- `encabezado_comida`: uno de "Para comer fuimos con:", "Nosotros probamos:", "Para comer
+  pedimos:", "De entrada pedimos:", "De principales pedimos:" (ver criterio en el punto 3).
+  `null` si `items_comida` es `null`.
 - `items_comida`, `items_bebida`, `postre`, `datos` son `null` si esa sección no aplica —
   nunca un array/objeto vacío ni relleno inventado.
 - `advertencias`: string o `null`. Se usa para avisar de problemas reales (ej: "no pude leer

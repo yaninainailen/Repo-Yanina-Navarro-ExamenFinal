@@ -187,21 +187,66 @@ cientos de KB por foto. Además se agregó una verificación en el frontend ante
 pedido (si el total comprimido igual supera ~3,5 MB, se avisa en pantalla en vez de dejar que
 falle en el servidor con un 413 sin contexto).
 
+## Capítulo 12 — corrida real de Il Giardino (modo Foto, 5 fotos): dos bugs encontrados (2026-09-09)
+
+Con el fix del capítulo 11 ya desplegado, la primera corrida real del modo Foto multi-imagen
+funcionó técnicamente (sin 413) y la visión de Claude leyó bien las 5 fotos: los platos y
+precios que devolvió (Provoleta a la brasa $18.000, Ñoquis con hongo porcini $26.000, T-Bone
+Steak $65.000) coinciden con el copy que la usuaria había escrito a mano cuando visitó el lugar
+— buena señal de que la lectura de imagen es confiable para el dato duro (precios), no solo
+para el link.
+
+Comparando el resultado contra ese copy de referencia aparecieron dos problemas reales:
+
+**1. Precio inventado, y no al azar — contaminación del few-shot.** El bloque de bebida mostró
+"🍸 Cocktails de autor (desde $17.600)", pero esa categoría no tenía precio visible en las
+fotos del menú. El número $17.600 no es una alucinación cualquiera: es **exactamente** el precio
+de "Cocktails de autor" del segundo ejemplo de la sección 5 del contrato (el ejemplo de LUZMALA).
+El modelo, al no tener el dato real, tomó un precio plausible de los ejemplos de estilo en vez
+de aplicar la regla existente de omitir el bloque cuando no hay precio real. La regla de "no
+inventar" ya estaba escrita, pero no cubría específicamente el caso de "reusar un número de los
+propios ejemplos del prompt" — un modo de fallo distinto a inventar de la nada.
+
+Fix: se agregó una restricción explícita y nombrando el caso concreto ("no uses $17.600 de
+cocktails de autor solo porque el ejemplo de LUZMALA también tiene cocktails de autor a ese
+precio") en `prompts/system_prompt.md`, más una aclaración reforzada en el encabezado de la
+sección EJEMPLOS. Nombrar el error real como ejemplo negativo es más efectivo que una regla
+genérica de "no inventar" — ya se había visto lo mismo con la Ñ/tildes del capítulo 8: las
+reglas abstractas no siempre alcanzan, hace falta ser específico sobre el modo de fallo real.
+
+**2. El encabezado del bloque de comida salió idéntico en las dos corridas guardadas** ("Para
+comer fuimos con:" en Misión y en Il Giardino) — pedido explícito de la usuaria de variarlo
+("Nosotros probamos...", "Para comer pedimos...", "De entrada pedimos...", "De principales
+pedimos..."). Esto revierte parcialmente la decisión del **capítulo 5**, que había fijado ese
+encabezado a un único texto para que el render fuera determinístico (en ese momento el problema
+era que el modelo armaba el texto final completo en prosa libre, y variar el encabezado ahí
+significaba menos control). La solución no es volver a prosa libre: se agregó `encabezado_comida`
+como campo del JSON estructurado, restringido por `enum` a las 5 frases aprobadas — el modelo
+elige una (según si los platos son entradas, principales, o mezcla), pero no puede escribir
+texto libre ahí. Sigue siendo determinístico y auditable, solo que con una elección acotada en
+vez de un valor fijo único.
+
+Esta corrida de Il Giardino no se guarda en `corridas/` tal cual (tiene los dos bugs) — con los
+fixes ya desplegados, se va a repetir con las mismas fotos para guardar la versión corregida
+como evidencia de la corrida 2.
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
       caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
-      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Dos corridas
-      seguidas con Misión salieron correctas con Haiku 4.5 — evidencia a favor de quedarse con
-      el modelo chico, a confirmar con las corridas en lugares nuevos que faltan.)*
-- [ ] Correr las 2 corridas reales que faltan, en lugares nuevos (no Misión) — al menos una en
-      modo Foto con varias hojas del menú, ahora que soporta hasta 5 imágenes — y guardarlas en
-      `corridas/`.
-- [ ] Análisis económico: costo real por corrida (por ahora dos datos, ambos ~US$ 0,0198-0,0199
-      con Haiku 4.5), proyección semanal/anual según el ritmo real de @barescopados (1-2
+      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Tres corridas
+      seguidas salieron con platos/precios correctos con Haiku 4.5 — evidencia a favor de
+      quedarse con el modelo chico; los dos bugs del capítulo 12 fueron de diseño del prompt,
+      no de precisión de lectura del modelo.)*
+- [ ] Repetir Il Giardino con los fixes del capítulo 12 y guardar como corrida 2 en `corridas/`.
+      Correr 1 corrida más en un lugar nuevo (modo Link o Texto) para llegar a las 3 exigidas.
+- [ ] Análisis económico: costo real por corrida (hasta ahora ~US$ 0,016-0,020 por corrida con
+      Haiku 4.5), proyección semanal/anual según el ritmo real de @barescopados (1-2
       posteos/semana).
 - [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
-      publicar, quién firma, y el caso del capítulo 9 (speech vs. menú en conflicto).
+      publicar, quién firma, y los casos de los capítulos 9 y 12 (fuente en conflicto,
+      contaminación de few-shot).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
 - [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.
 - [x] Modo Foto: fix del 413 (compresión de imágenes antes de mandarlas) — capítulo 11.
+- [x] Modo Foto: validado con caso real (Il Giardino, 5 fotos) — capítulo 12.
