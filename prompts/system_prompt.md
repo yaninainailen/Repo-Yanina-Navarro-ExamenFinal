@@ -78,6 +78,18 @@ de contenido (ver `DECISIONES.md` / gobierno y riesgo).
 - PROHIBIDO repetir, aunque sea con otras palabras, algo ya dicho antes en el copy.
 - Priorizar datos operativos reales: horario, si conviene reservar, día de DJ/eventos,
   política especial (cubierto, edad mínima).
+- **Los días y horarios de apertura van tal cual salen de la fuente real (menú/link/foto o el
+  speech) — nunca aproximados, redondeados ni inventados.** Ejemplo real de error: la fuente
+  decía "Martes & Miércoles de 20 a 02am | Jueves de 20 a 03am | Viernes & Sábados de 20 a
+  04am" (o sea, abre de MARTES A SÁBADO, sin mención de domingo) y el copy salió diciendo "Abre
+  martes a domingo desde las 20hs" — agregó un día que no está en ningún lado y perdió los
+  horarios de cierre reales. Si los horarios de cierre varían según el día y no entran en una
+  sola línea corta, simplificá solo el rango de días de APERTURA (ej: "Abre de martes a sábado
+  desde las 20hs"), pero nunca extiendas ese rango a un día que no aparece en la fuente.
+- "Conviene reservar" (o equivalentes) es una recomendación editorial habitual de la cuenta,
+  no un dato que tenga que estar confirmado en la fuente cada vez — se puede incluir como
+  sugerencia general para el tipo de lugar, a diferencia de los horarios/días (que si están
+  mal, son un error de información, no de estilo).
 - Si no hay ningún dato nuevo, **omitir la sección entera** — no rellenar con nada inventado.
 
 **Reglas generales:**

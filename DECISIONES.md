@@ -290,24 +290,61 @@ queda validado de punta a punta con un caso real de menú de varias hojas.
 
 **Corridas: 2 de 3 completas.**
 
+## Capítulo 15 — tercer intento de corrida (Victoria Brown): horario inventado en DATOS (2026-09-09)
+
+Primer intento de la corrida 3 (Victoria Brown, modo Link). La lectura de menú vía `web_fetch`
+volvió a ser precisa: "Truchón Patagónico" ($41.000), "Ojo de Bife" ($44.000) y "Copón
+Victoriano" ($21.500) coinciden exactamente con el menú real online. "Mollejitas" (mencionadas
+en el speech) no figuran en el menú actual del lugar — el sistema correctamente le puso
+`precio: null` en vez de inventar uno, confirmando que el fix del capítulo 13 sigue funcionando
+también con datos de `web_fetch`, no solo con fotos.
+
+Pero apareció un bug nuevo, de la misma familia que los precios inventados: en la sección
+DATOS, el copy dijo "Abre martes a domingo desde las 20hs." La fuente real (texto scrapeado por
+`web_fetch`) dice textualmente: *"Martes & Miércoles de 20 a 02am | Jueves de 20 a 03am |
+Viernes & Sábados de 20 a 04am."* — es decir, abre de **martes a sábado**, sin ninguna mención
+de domingo, y con tres horarios de cierre distintos según el día. El modelo comprimió esa
+información en una sola línea y en el proceso agregó un día que no existe en la fuente.
+
+(De paso se había marcado como sospechoso "Conviene reservar.", que no aparece en el menú ni en
+el speech — pero la usuaria aclaró que ese es un dato editorial habitual de la cuenta, no algo
+que necesite estar confirmado en la fuente cada vez. Distinción importante para el contrato:
+horarios/días son datos verificables que, si están mal, son un error de información real; una
+recomendación como "conviene reservar" es estilo editorial de @barescopados, no un hecho que
+haya que sourcear. El contrato quedó ajustado para reflejar exactamente esa distinción, sin
+restringir de más.)
+
+Es el mismo patrón de fondo que los precios de los capítulos 12 y 13, aplicado a horarios: cuando
+el modelo tiene que resumir algo y no puede simplificarlo sin perder precisión, rellena con algo
+plausible en vez de limitarse estrictamente a lo verificable. Acá no hay un problema de schema
+(el campo `datos` ya es texto libre, no hay nada que forzar) — es puramente de instrucción. Se
+agregó una regla explícita en `prompts/system_prompt.md`, sección DATOS, citando el caso real
+como ejemplo negativo (mismo patrón que funcionó en los capítulos 8 y 12: nombrar el error
+concreto en vez de una prohibición genérica).
+
+Esta corrida de Victoria Brown no se guarda todavía — se va a repetir con el fix ya desplegado
+para tener la corrida 3 limpia.
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
       caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
       Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Los platos y
-      precios reales siempre salieron correctos con Haiku 4.5 en las 2 corridas guardadas — los
-      bugs de los capítulos 12 y 13 fueron de diseño del contrato/schema, no de precisión de
-      lectura del modelo — evidencia a favor de quedarse con el modelo chico.)*
-- [ ] Correr 1 corrida más en un lugar nuevo (modo Link o Texto) para llegar a las 3 exigidas.
+      precios reales siempre salieron correctos con Haiku 4.5 en las 3 corridas probadas hasta
+      ahora — todos los bugs encontrados fueron de diseño del contrato/schema, no de precisión
+      de lectura del modelo — evidencia a favor de quedarse con el modelo chico.)*
+- [ ] Repetir Victoria Brown con el fix del capítulo 15 y guardar como corrida 3 en `corridas/`.
 - [ ] Análisis económico: costo real por corrida (rango observado US$ 0,011-0,020 con Haiku
       4.5, según si pega en cache), proyección semanal/anual según el ritmo real de
       @barescopados (1-2 posteos/semana).
 - [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
-      publicar, quién firma, y los casos de los capítulos 9, 12 y 13 (fuente en conflicto,
-      contaminación de few-shot, schema que forzaba a inventar precios).
+      publicar, quién firma, y los casos de los capítulos 9, 12, 13 y 15 (fuente en conflicto,
+      contaminación de few-shot, schema que forzaba a inventar precios, datos operativos
+      completados con suposiciones plausibles).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
 - [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.
 - [x] Modo Foto: fix del 413 (compresión de imágenes antes de mandarlas) — capítulo 11.
 - [x] Modo Foto: validado con caso real (Il Giardino, 5 fotos) — capítulos 12-14.
 - [x] Precio inventado cuando no hay dato real: `precio` nullable en el schema — capítulo 13.
 - [x] Corrida 2 guardada (`corridas/corrida-2-il-giardino.json`) — capítulo 14.
+- [x] Horario/dato operativo inventado en DATOS: regla explícita agregada — capítulo 15.
