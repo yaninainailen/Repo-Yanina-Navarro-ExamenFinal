@@ -74,27 +74,33 @@ Instrucciones principales, en orden, dadas a Claude Code:
   frases aprobadas, no texto libre) en vez de salir siempre igual.
 - Cuando no hay un precio real para un plato/trago, el sistema lo menciona igual sin precio en
   vez de inventar un número o esconderlo (`precio: null` en el JSON estructurado).
+- **Las 3 corridas reales exigidas están completas**: Misión (Link), Il Giardino (Foto, 5
+  imágenes) y [Victoria Brown](corridas/corrida-3-victoria-brown.json) (Link) — esta última
+  mostró además al sistema usando el campo `advertencias` correctamente: cuando la dirección
+  cargada a mano no coincidía con la del menú online, avisó la discrepancia en vez de mezclar
+  los datos o inventar cuál era la correcta.
 
 ## Qué falta o qué falló
 
 *(Se actualiza a medida que se completan los puntos pendientes de `DECISIONES.md`.)*
 
-- Corrieron 2 de las 3 corridas reales exigidas (Misión por Link, Il Giardino por Foto con 5
-  imágenes) — falta 1 más, en un lugar nuevo, para cerrar las 3.
-- El modelo por defecto (`claude-haiku-4-5`) resultó preciso leyendo platos y precios reales en
-  las 2 corridas guardadas (tanto de un link como de fotos) — a confirmar con la corrida que
-  falta antes de dar la elección por cerrada.
+- Las 3 corridas reales exigidas ya están corridas y guardadas en `corridas/`. El modelo por
+  defecto (`claude-haiku-4-5`) resultó preciso leyendo platos y precios reales en las 3 (tanto
+  de links como de fotos) — ningún error de precisión de lectura, todos los bugs encontrados
+  fueron de diseño del contrato o del schema (ver abajo).
 - Encontrados y corregidos varios bugs reales durante las pruebas en producción — el detalle
-  completo de cada uno está en `DECISIONES.md` (capítulos 7 a 14): `web_fetch` necesitaba
+  completo de cada uno está en `DECISIONES.md` (capítulos 7 a 16): `web_fetch` necesitaba
   `allowed_callers: ["direct"]` con Haiku 4.5; el alfabeto Unicode del título en negrita no
   soporta vocales acentuadas ni Ñ; el modo Foto solo aceptaba una imagen (los menús reales
   tienen varias hojas); Vercel corta cualquier request a 4.5 MB (fotos de celular sin comprimir
-  la superaban); y el más interesante: un precio inventado que resultó ser una **contaminación
-  del few-shot** (copiado textual de uno de los ejemplos del contrato) y que, incluso después
-  de prohibirlo explícitamente, se seguía inventando porque el JSON Schema exigía un precio
-  como string obligatorio — la regla vivía en el prompt pero la obligación real vivía en la
-  estructura de datos, y hubo que arreglar el schema, no solo el texto.
-- Faltan las secciones de análisis económico (proyección semanal/anual) y de gobierno y riesgo.
+  la superaban); un precio inventado que resultó ser una **contaminación del few-shot** (copiado
+  textual de uno de los ejemplos del contrato) y que, incluso después de prohibirlo
+  explícitamente, se seguía inventando porque el JSON Schema exigía un precio como string
+  obligatorio — la regla vivía en el prompt pero la obligación real vivía en la estructura de
+  datos, y hubo que arreglar el schema, no solo el texto; y un horario inventado en la sección
+  de datos operativos (agregó un día que no estaba en la fuente real).
+- Faltan las secciones de análisis económico (proyección semanal/anual) y de gobierno y riesgo,
+  y confirmar la elección de modelo por escrito con la evidencia ya reunida.
 
 ## Qué aprendí
 

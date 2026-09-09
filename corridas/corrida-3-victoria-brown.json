@@ -1,0 +1,116 @@
+{
+  "fecha": "2026-09-09T22:45:18.319Z",
+  "entrada": {
+    "nombreBar": "Victoria Brown",
+    "instagramLugar": "@victotriabrownba",
+    "direccion": "Honduras 444, palerml",
+    "speech": "Bar oculto en Palermo que es un viaje en el tiempo , esto es victoria Brown un lugar ambientado como una fabrica de la epoca victoriana del siglo 19 con detalles en cada rincon.\nTiene una barra muy original y su coctelería de autor la rompe. Probamos varios traguitos que nos encantaron.\nPara comer Arrancamos con unas mollejitas \nDe principales un truchon patagonico con verduras,  y un ojo de bife con papas fritas muy rico.\nY cerramos como se debe con un copon victoriano que estaba buenísimo.\nVos con quien vendrias? Etiquetalo\nSeguinos en @barescopados para mas recomendaciones y te dejamos mas info y precios en la descripción",
+    "idealPara": [
+      "citas"
+    ],
+    "menuModo": "link",
+    "menuLink": "https://monline.com.ar/VictoriaBrownBar",
+    "menuTexto": ""
+  },
+  "salida": {
+    "copy": "🏭𝗩𝗜𝗖𝗧𝗢𝗥𝗜𝗔 𝗕𝗥𝗢𝗪𝗡🏭\n\n¿Sabías que existe un bar que es un viaje en el tiempo? Conocimos @victoriabrownbar, un lugar oculto en Palermo ambientado como una fábrica de la época victoriana del siglo XIX, donde cada rincón está lleno de detalles cuidados y su coctelería de autor te va a sorprender. 🥃\n\nNosotros probamos:\n🫘 Mollejitas\n🐟 Truchón Patagónico con papines, tomates cherry y verduras de estación ($41.000)\n🥩 Ojo de Bife con papas fritas ($44.000)\n\nPara tomar:\n🍹 Cocktails de autor (desde $13.000)\n\nY de postre…\n🥣 Copón Victoriano con merengue aireado, frutas de estación, dulce de leche cremoso y Chantilly artesanal ($21.500)\n\n✍🏼 DATOS:\n✅ Abre de martes a sábado desde las 20hs (con cierre variable: hasta las 02am entre semana, hasta las 04am los sábados).\n✅ Una barra muy original y coctelería de autor.\n\n☝🏼 Ideal para: citas\n\n📍 Honduras 444, Palermo\n\n📲 ¿Vos con quién vendrías a Victoria Brown?\n\n#BaresCopados #BarOculto #Cocteleria #Palermo #VictoriaBrownBar",
+    "datosEstructurados": {
+      "emoji_tematico": "🏭",
+      "nombre_lugar": "Victoria Brown",
+      "apertura": "¿Sabías que existe un bar que es un viaje en el tiempo? Conocimos @victoriabrownbar, un lugar oculto en Palermo ambientado como una fábrica de la época victoriana del siglo XIX, donde cada rincón está lleno de detalles cuidados y su coctelería de autor te va a sorprender. 🥃",
+      "encabezado_comida": "Nosotros probamos:",
+      "items_comida": [
+        {
+          "emoji": "🫘",
+          "item": "Mollejitas",
+          "precio": null
+        },
+        {
+          "emoji": "🐟",
+          "item": "Truchón Patagónico con papines, tomates cherry y verduras de estación",
+          "precio": "$41.000"
+        },
+        {
+          "emoji": "🥩",
+          "item": "Ojo de Bife con papas fritas",
+          "precio": "$44.000"
+        }
+      ],
+      "items_bebida": [
+        {
+          "emoji": "🍹",
+          "item": "Cocktails de autor",
+          "precio": "desde $13.000"
+        }
+      ],
+      "postre": {
+        "emoji": "🥣",
+        "item": "Copón Victoriano con merengue aireado, frutas de estación, dulce de leche cremoso y Chantilly artesanal",
+        "precio": "$21.500"
+      },
+      "datos": [
+        "Abre de martes a sábado desde las 20hs (con cierre variable: hasta las 02am entre semana, hasta las 04am los sábados).",
+        "Una barra muy original y coctelería de autor."
+      ],
+      "ideal_para": [
+        "citas"
+      ],
+      "direccion": "Honduras 444, Palermo",
+      "cierre_emoji": "📲",
+      "cierre_pregunta": "¿Vos con quién vendrías a Victoria Brown?",
+      "hashtags": [
+        "#BaresCopados",
+        "#BarOculto",
+        "#Cocteleria",
+        "#Palermo",
+        "#VictoriaBrownBar"
+      ],
+      "advertencias": "Nota: El menú online tiene dirección diferente (Costa Rica 4827); se usó la dirección proporcionada por el usuario (Honduras 444). La mollejita no aparece en el menú online, se incluyó porque está mencionada en el speech pero sin precio disponible."
+    },
+    "fuentes": [
+      {
+        "tipo": "solicitud",
+        "url": "https://monline.com.ar/VictoriaBrownBar"
+      },
+      {
+        "tipo": "resultado",
+        "detalle": {
+          "type": "web_fetch_result",
+          "url": "https://monline.com.ar/VictoriaBrownBar",
+          "retrieved_at": "2026-09-09T21:47:45.758000+00:00",
+          "content": {
+            "type": "document",
+            "source": {
+              "type": "text",
+              "media_type": "text/plain",
+              "data": "---\nmeta-description: Menú Online\nmeta-image: https://monline.com.ar/img_comercios/5cc859f59b65410369eb6dd79ca74ea0.png\nmeta-og:description: Menú Online\nmeta-og:image: https://monline.com.ar/img_comercios/5cc859f59b65410369eb6dd79ca74ea0.png\nmeta-og:title: Victoria Brown Bar\nmeta-og:type: website\nmeta-og:url: www.monline.com.ar/VictoriaBrownBar\nmeta-title: Victoria Brown Bar\nmeta-viewport: width=device-width, initial-scale=1, shrink-to-fit=no\ntitle: Victoria Brown Bar\n---\n\n![](https://monline.com.ar/img_comercios/5cc859f59b65410369eb6dd79ca74ea0.png)\n\n- Costa Rica 4827, CABA.\n-  [+5491124073412](#)\n- [/victoriabrownbar](https://www.instagram.com/victoriabrownbar)\n\n### Prologo\n\nEl nombre de este bar hace referencia a la historia de un amor prohibido, plagado de misterio, locura, desencuentro, un poco de magia – como cualquier relato de un amorío atemporal – y que, afortunadamente, cuenta con un final feliz.  \n\nDejate tentar y sorprender por las más osadas combinaciones de las bebidas más finas y delicadas. Sé participe de la mágica unión de dos almas. Sé parte de nuestra historia.  \n\n![](https://monline.com.ar/listas/img/bullet-vbrow-cierre.png)\n\n**Platitos**\n\n#### Papas Triple Cocción\n\nPapas triple coccion, doradas & crujientes por fuera, cremosas en su interior, con salsa de parmesano & un toque fresco de ciboulette.\n\n$ 28.000\n\n#### Buñuelos De Espinaca\n\nDorados & aireados, con corazón de parmesano & pategras, acompañados por pesto de rucula & alioli de cilantro.\n\n$ 28.000\n\n#### Anillos de calamar\n\nDe textura crujiente & bocado tierno, con lima & salsa tartara.\n\n$ 29.000\n\n#### Pinchos De Lomo\n\nMarinados en cerveza & limón, de sabor jugoso & vibrante, acompañados de papines & provenzal.\n\n$ 30.000\n\n#### Pinchos De Pollo\n\nMarinados en cerveza & limón, de sabor jugoso & vibrante, acompañados de papines & provenzal.\n\n$ 30.000\n\n#### Brie Crocante\n\nRebozado en panko, de interior fundente, con mermelada de moras, pesto de albahaca, rúcula & tomates cherry frescos.\n\n$ 30.000\n\n#### Ceviche Clásico\n\nPesca Blanca Marinada en Leche de Tigre - Batata Frita - Maíz Cancha\n\n$ 30.000\n\n#### Tartar De Lomo\n\nTartar de lomo cortado a cuchillo, con alcaparras, cilantro & morron, realzado por una intensa salsa de ostras & mariscos.\n\n$ 32.000\n\n#### Tartar De Trucha\n\nTartar de trucha cortado a cuchillo, con alcaparras, cilantro & morron, realzado por una intensa salsa de ostras & mariscos.\n\n$ 32.000\n\n#### Tempura Shirin\n\nLangostinos rebozados con salsa de maracuya y almendras , en colchon de masa filo.\n\n$ 32.000\n\n#### Sinfonia De Mar\n\nLangostinos, anillos de calamar & pesca del dia, envueltos en una delicada velouté, presentados sobre conchas marinas.\n\n$ 33.000\n\n**Platos**\n\n#### Ensalada de Trucha Curada\n\nMix de verdes - queso brie - tomates cherrys confitados - uvas - nueces & vinagre de miel.\n\n$ 32.000\n\n#### Wraps Veggie\n\nAcompañado de papas fritas\n\n$ 33.000\n\n#### Wraps Lomo\n\nAcompañado con papas fritas\n\n$ 33.000\n\n#### Wraps Pollo\n\nAcompañado de papas fritas\n\n$ 33.000\n\n#### Risotto de Hongos\n\nCon crocancia de queso parmesano\n\n$ 37.500\n\n#### Hamburguesa Victoria Brown\n\nAcompañada de queso azul - piña - rúcula y papas fritas.\n\n$ 38.500\n\n#### Ribs a la barbacoa estilo americano\n\nAcompañado de papas fritas bastón y provenzal de hierbas.\n\n$ 41.000\n\n#### Truchon Patagonico\n\nCon papines - tomates cherry - verduras de estación & romesco.\n\n$ 41.000\n\n#### Ojo de Bife\n\nPapas Fritas - Chimichurri de Hierbas Frescas\n\n$ 44.000\n\n**Postres**\n\n#### Volcán de DDL\n\nAcompañado de una bocha de helado de crema americana & frutos rojos.\n\n$ 16.000\n\n#### Volcán de Chocolate\n\nAcompañado de una bocha de helado de crema americana & frutos rojos\n\n$ 16.000\n\n#### Cheesecake de Frutos Rojos\n\nAcompañado de una bocha de helado de crema americana\n\n$ 18.000\n\n#### Cheesecake de Lima\n\nAcompañado de una bocha de helado de crema americana\n\n$ 18.000\n\n#### Copón Victoriano\n\nCombinación de merengue aireado, frutas de estación, dulce de leche cremoso y Chantilly artesanal\n\n$ 21.500\n\n**Soft**\n\n#### Agua Con Gas\n\n$ 6.000\n\n#### Agua Sin Gas\n\n$ 6.000\n\n#### Coca Cola || Coca Cola Zero\n\n$ 7.500\n\n#### Sprite||Sprite Zero\n\n$ 7.500\n\n#### Paso De Los Toros TONICA||POMELO\n\n$ 7.500\n\n#### Red Bull Energy\n\n250ml\n\n$ 7.500\n\n#### Schweppes Tonica\n\n$ 7.500\n\n**Mocktails**\n\n#### Tonico Del Bosque\n\nALMIBAR DE MANZANA ROJA & EUCALIPTO - LIMA LIMON - SODA\n\n$ 11.000\n\n#### Smoked Ginger Honey\n\nMIEL MULTIFLORAL - JUGO DE JENGIBRE - LIMON AHUMADO CON ASTILLAS DE MANZANO\n\n$ 11.000\n\n**Appetizers**\n\n#### Carpano Originale\n\nVERMOUTH CARPANO ROSSO - SODA CITRICOS DE ESTACION\n\n$ 13.000\n\n#### Fernet Julep\n\nFERNET BRANCA FRATELLI - MENTA NEGRA - ALMIBAR AL MASCABO - POMELO ROSADO\n\n$ 16.000\n\n**Cocktails - Clasicos**\n\n#### VOL. I\n\n#### BOULEVARDIER BY THE MACALLAN\n\nWHISKY MACALLAN 12 - ANTICA FORMULA - RED BITTER - ORANGE TWIST\n\n$ 55.000\n\n#### Fernet Branca\n\nFERNET BRANCA - COCA COLA\n\n$ 16.000\n\n#### Tonico De Otoño\n\nBEEFEATER LONDON DRY GIN - LIMA & LIMON - MANZANA ROJA & EUCALIPTO - SCHEWEPPES\n\n$ 16.000\n\n#### Paloma\n\nJIMADOR BLANCO TEQUILA - CARAMELO SALADO - POMELO ROSADO & LIMA LIMON\n\n$ 16.000\n\n#### Clericot\n\nSAUVIGNON BLANC - BEEFEATER BLOOD ORANGE - LIMONADA AL SAUCO\n\n$ 16.000\n\n#### Agave Mule\n\nJIMADOR REPOSADO TEQUILA - LIMAS - MIEL AL JENGIBRE - SODA\n\n$ 16.000\n\n#### Mojito\n\nBLEND DE RONES HAVANA - LIMONADA AL MASCABO - MENTA NEGRA - BITTER ANGOSTURA\n\n$ 16.000\n\n#### VOL. II\n\n#### Spicy Margarita\n\nJIMADOR BLANCO TEQUILA - COINTREAU - MIEL AL JALAPEÑO - LIMA LIMON\n\n$ 17.500\n\n#### Penicilin\n\nJW RED LABEL - MIEL AL JENGIBRE - CITRICO - AHUMADO CON ARDBEG SINGLE MALT\n\n$ 17.500\n\n#### Aviation\n\nBEEFEATER LONDON DRY GIN - PARFAIT AMOUR & MARASCHINO- LIMA LIMÓN\n\n$ 17.500\n\n#### Cafe Brulle\n\nVODKA VAINILLA - CARAMELO SALADO - COLD BREW - LICOR BORGHETTI\n\n$ 17.500\n\n#### Mai Tai\n\nBLEND DE RONES HAVANA - LIMA LIMON - COINTREAU - CREMA DE ALMENDRAS\n\n$ 17.500\n\n#### Bloody\n\nVODKA 3 PIMIENTAS - JUGO DE TOMATE ESPECIADO - LIMA LIMON - SALSA INGLESA & TABASCO\n\n$ 17.500\n\n#### VOL. III\n\n#### Cherry Manhattan\n\nJIM BEAM BOURBON - VERMOUTH ROSSO CHEERY BRANDY - ANGOSTURA\n\n$ 19.000\n\n#### Dirty Martini\n\nBEEFEATER LONDON DRY GIN - VERMOUTH DRY - SALMUERA PATAGONICA - OLIVAS CROCANTES\n\n$ 19.000\n\n#### Old Fashioned\n\nJIM BEAM BOURBON - BITTER ANGOSTURA - ÓLEO DE NARANJAS & MANDARINAS - CEREZA\n\n$ 19.000\n\n#### Negroni Perfeto\n\nBEEFEATER LONDON DRY GIN - ANTICA FORMULA\n\n$ 19.000\n\n#### Mint Sazerac\n\nJIM BEAM BOURBON - ALMÍBAR AL MASCABO - MENTA NEGRA - ABSHENTA\n\n$ 19.000\n\n**Cocktails con Redbull**\n\n#### Jagerbomb\n\nJagermeister & Redbull Energy Drink\n\n$ 22.000\n\n#### Jack bull\n\nWhisky Jack Daniels con Redbull\n\n$ 20.000\n\n#### Redbull Vodka\n\nVodka Sernova con Redbull\n\n$ 20.000\n\n#### Redbull Gin\n\nGin SPIRITO BLU con Redbull\n\n$ 20.000\n\n**Cervezas**\n\n#### Corona 0.0%\n\nSin Alcohol\n\n$ 11.000\n\n#### Corona\n\n$ 13.000\n\n#### Andes ipa\n\n$ 12.000\n\n#### Stella Artois\n\n$ 12.000\n\n#### Stella Artois 0.0%\n\nSin Alcohol\n\n$ 11.000\n\n**Happy Hour**\n\n#### Martes a jueves - De 20 a 00hs\n\n#### Sea Breaze\n\nVODKA SERNOVA - CRAMBERRY - POMELO ROSADO\n\n$ 17.000\n\n#### GIN TONIC\n\nGIN SPIRITO BLU - TONICA\n\n$ 17.000\n\n#### FERNET\n\nFERNET BRANCA - COCA-COLA\n\n$ 17.000\n\n**Vinos Tintos**\n\n#### Blend\n\n#### Bressia Profundo\n\nBlend\n\n$ 63.000\n\n#### Cupra Gran Corte 2024\n\nBlend\n\n$ 79.000\n\n#### Cabernet Franc\n\n#### Bressia Monteagrello\n\nCabernet Franc\n\n$ 47.000\n\n#### Imperial Stag\n\nCabernet Franc\n\n$ 75.000\n\n#### Malbec\n\n#### Copa de Vino Tinto\n\nMaal Wines Imposible - Bressia Monteagrello\n\n$ 13.000\n\n#### Copa De vino Tinto Premium\n\nCupra Gran Malbec - Imperial Stag\n\n$ 18.000\n\n#### Maal Wines Imposible\n\nMalbec\n\n$ 54.000\n\n#### Imperial Stag\n\nMalbec\n\n$ 69.000\n\n#### Cupra Gran Malbec 2024\n\nMalbec\n\n$ 79.000\n\n#### Pinot Noir\n\n#### Bressia Piel Negra\n\nPinot Noir\n\n$ 62.000\n\n#### Cupra Gran Pinot Noir 2024\n\nPinot Noir\n\n$ 79.000\n\n**Vinos Blancos y Rosados**\n\n#### Uvas Blancas\n\n#### Copa de Vino Blanco\n\nSylvestra Sauvignon Blanc\n\n$ 13.000\n\n#### Copa De Vino Blanco Premium\n\nCupra Gran Chardonnay 2024\n\n$ 18.000\n\n#### Sylvestra Sauvignon Blanc\n\nUvas Blancas\n\n$ 45.000\n\n#### Bressia Lagrima Canela\n\nUvas Blancas\n\n$ 53.000\n\n#### Imperial Stag Semillon 2024\n\nUvas Blancas\n\n$ 63.000\n\n#### Cupra Gran Chardonnay 2024\n\nUvas Blancas\n\n$ 69.000\n\n#### Rosados\n\n#### Maal Wines NN Clarete\n\nRosado\n\n$ 45.000\n\n#### Imperial Stag\n\nRosado\n\n$ 54.000\n\n#### Cupra Incoronata Rose\n\nRosado\n\n$ 69.000\n\n**Espumantes**\n\n#### Copa de Espumante\n\n$ 20.000\n\n#### Dos Puentes Extra Brut\n\nEspumante\n\n$ 50.000\n\n#### Maal Wines Ambiguo La Vieja\n\nEspumante\n\n$ 60.000\n\n#### Bressia Royale Brut Nature\n\nEspumante\n\n$ 75.000\n\n**Tequila & Mezcal**\n\n#### Jimador Reposado\n\n$ 18.000\n\n#### José Cuervo Tradicional Reposado\n\n$ 22.000\n\n#### 1800 Cristalino\n\n$ 28.000\n\n#### Mezcal Montelobos Espadin\n\n$ 31.000\n\n**American**\n\n#### Jack Daniel´s N7\n\n$ 25.000\n\n#### Jim Beam Black\n\n$ 28.000\n\n#### Gentleman Jack\n\n$ 35.000\n\n#### Maker´s Mark\n\n$ 30.000\n\n**Scotch**\n\n#### THE MACALLAN 12\n\n$ 49.000\n\n#### JW Black\n\n$ 21.000\n\n#### JW Double Black\n\n$ 23.000\n\n#### Monkey Shoulder\n\n$ 22.000\n\n#### Singleton 12\n\n$ 22.000\n\n#### Ardbeg\n\n$ 23.000\n\n#### JW Gold Reserve\n\n$ 32.000\n\n#### JW Green\n\n$ 60.000\n\n#### JW Blue\n\n$ 95.000\n\n**Vodka**\n\n#### Absolut Blue\n\n$ 18.000\n\n#### Belvedere\n\n$ 26.000\n\n**Gin**\n\n#### SPIRITO BLU\n\n$ 16.000\n\n#### Tanqueray\n\n$ 18.000\n\n#### Bombay\n\n$ 20.000\n\n#### Nordes\n\n$ 25.000\n\n#### Mare\n\n$ 27.000\n\n#### Hendrick´s\n\n$ 28.000\n\n#### Monkey 47\n\n$ 28.000\n\n**Ron De Caña**\n\n#### Havana 7\n\n$ 18.000\n\n#### Flor De Caña 7\n\n$ 18.000\n\n#### Flor De Caña 10\n\n$ 22.000\n\n**Ice Cold Liquors**\n\n#### Fireball Spicy Cinnamon\n\n$ 14.000\n\n#### Jägermeister\n\n$ 16.000\n\n[Enviar WhatsApp](https://api.whatsapp.com/send?phone=+5491124073412&text=Hola%20Victoria Brown Bar) [Compartilo!](https://api.whatsapp.com/send?text=https://www.monline.com.ar/VictoriaBrownBar)\n\n##### Horarios de atención\n\n- Martes & Miércoles de 20 a 02am | Jueves de 20 a 03am | Viernes & Sábados de 20 a 04am.\n\n![](<>)\n\nEsta lista es provista por [**menu**online. ¿Querés la tuya?](https://www.monline.com.ar)"
+            },
+            "title": "Victoria Brown Bar"
+          }
+        }
+      }
+    ],
+    "modelo": "claude-haiku-4-5",
+    "usage": {
+      "input_tokens": 648,
+      "cache_creation_input_tokens": 11433,
+      "cache_read_input_tokens": 6497,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 11433,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 612,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 1
+      }
+    },
+    "costo": {
+      "costoInputUSD": 0.015589,
+      "costoOutputUSD": 0.00306,
+      "costoTotalUSD": 0.018649
+    }
+  }
+}

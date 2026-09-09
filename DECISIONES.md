@@ -325,26 +325,60 @@ concreto en vez de una prohibición genérica).
 Esta corrida de Victoria Brown no se guarda todavía — se va a repetir con el fix ya desplegado
 para tener la corrida 3 limpia.
 
+## Capítulo 16 — corrida 3 (Victoria Brown) validada, y un extra: `advertencias` en acción (2026-09-09)
+
+Se repitió Victoria Brown con el fix del capítulo 15 desplegado y salió limpia: "Abre de martes
+a sábado desde las 20hs (con cierre variable: hasta las 02am entre semana, hasta las 04am los
+sábados)" — sin domingo inventado, y de hecho más preciso que el pedido mínimo (reflejó los tres
+horarios de cierre distintos en vez de perderlos). "Conviene reservar" no apareció esta vez;
+tampoco hacía falta, no cambia nada del fix.
+
+Además pasó algo que vale la pena destacar para la sección de gobierno y riesgo: la usuaria
+cargó a mano un Instagram y una dirección con errores de tipeo, distintos a los reales
+(`@victotriabrownba`, "Honduras 444, palerml"), y el menú real (`web_fetch`) trae una dirección
+registrada distinta a esa (Costa Rica 4827). El sistema no intentó adivinar cuál dirección es la
+"correcta" ni las mezcló: usó la dirección que la usuaria cargó a mano (la fuente de verdad para
+ese campo, según el contrato) y dejó un aviso explícito en el campo `advertencias`: *"El menú
+online tiene dirección diferente (Costa Rica 4827); se usó la dirección proporcionada por el
+usuario (Honduras 444). La mollejita no aparece en el menú online, se incluyó porque está
+mencionada en el speech pero sin precio disponible."* — exactamente el comportamiento que pide
+el contrato ante una fuente en conflicto: no inventar cuál dato es el correcto, señalar la
+discrepancia y dejar que una persona lo revise antes de publicar.
+
+Queda guardada en [`corridas/corrida-3-victoria-brown.json`](corridas/corrida-3-victoria-brown.json).
+
+**Corridas: 3 de 3 completas — las 3 exigidas por la consigna del trabajo final.**
+
+Resumen de las 3: Misión (Link), Il Giardino (Foto, 5 imágenes), Victoria Brown (Link). Los tres
+modos de carga de menú quedaron representados entre las corridas guardadas (Foto y Link con 2
+casos reales cada uno contando las pruebas fallidas documentadas en los capítulos previos; Texto
+no se llegó a probar con una corrida guardada, pero es el modo más simple —sin herramienta
+externa— y no tuvo ningún bug propio en el desarrollo).
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
       caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
       Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Los platos y
-      precios reales siempre salieron correctos con Haiku 4.5 en las 3 corridas probadas hasta
-      ahora — todos los bugs encontrados fueron de diseño del contrato/schema, no de precisión
-      de lectura del modelo — evidencia a favor de quedarse con el modelo chico.)*
-- [ ] Repetir Victoria Brown con el fix del capítulo 15 y guardar como corrida 3 en `corridas/`.
+      precios reales siempre salieron correctos con Haiku 4.5 en las 3 corridas guardadas —
+      todos los bugs encontrados fueron de diseño del contrato/schema, no de precisión de
+      lectura del modelo — evidencia sólida a favor de quedarse con el modelo chico.)*
 - [ ] Análisis económico: costo real por corrida (rango observado US$ 0,011-0,020 con Haiku
       4.5, según si pega en cache), proyección semanal/anual según el ritmo real de
       @barescopados (1-2 posteos/semana).
 - [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
-      publicar, quién firma, y los casos de los capítulos 9, 12, 13 y 15 (fuente en conflicto,
-      contaminación de few-shot, schema que forzaba a inventar precios, datos operativos
-      completados con suposiciones plausibles).
+      publicar, quién firma, y los casos reales de los capítulos 9, 12, 13, 15 y 16 (fuente en
+      conflicto resuelta con `advertencias`, contaminación de few-shot, schema que forzaba a
+      inventar precios, datos operativos completados con suposiciones plausibles).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
 - [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.
 - [x] Modo Foto: fix del 413 (compresión de imágenes antes de mandarlas) — capítulo 11.
 - [x] Modo Foto: validado con caso real (Il Giardino, 5 fotos) — capítulos 12-14.
+- [x] Precio inventado cuando no hay dato real: `precio` nullable en el schema — capítulo 13.
+- [x] Corrida 2 guardada (`corridas/corrida-2-il-giardino.json`) — capítulo 14.
+- [x] Horario/dato operativo inventado en DATOS: regla explícita agregada — capítulo 15.
+- [x] Corrida 3 guardada (`corridas/corrida-3-victoria-brown.json`) — capítulo 16.
+- [x] **Las 3 corridas reales exigidas están completas.**
 - [x] Precio inventado cuando no hay dato real: `precio` nullable en el schema — capítulo 13.
 - [x] Corrida 2 guardada (`corridas/corrida-2-il-giardino.json`) — capítulo 14.
 - [x] Horario/dato operativo inventado en DATOS: regla explícita agregada — capítulo 15.
