@@ -1,0 +1,91 @@
+{
+  "fecha": "2026-09-09T21:41:14.724Z",
+  "entrada": {
+    "nombreBar": "Il Giardino",
+    "instagramLugar": "@ilgiardinoterrazaromagnoli",
+    "direccion": "Posadas 1017, Recoleta",
+    "speech": "Sabias que existe un bar con domos en buenos aires?\nEsto es Il Giardino\n\nun lugar donde podés disfrutar de comer al aire libre incluso en pleno invierno, porque tienen domos calefaccionados y hasta te dan mantitas\n\nLa coctelería de autor esta buenísima y su especialidad son las pastas, como estos ñoquis con crema de hongos y trufa que estaban exquisitos. Tambien hay muy buenas opciones de parrilla como provoleta y este T bone con puré que a lucho le encantó.\n\ntienen un salón interno muy lindo y un domo enorme ideal para festejar cumples o after office.\n\nVos con quien vendrias? Etiquetalo\nSeguinos en @barescopados para mas recomendaciones y te dejamos mas info y precios en la descripción",
+    "idealPara": [
+      "citas",
+      "amigos",
+      "cumpleaños"
+    ],
+    "menuModo": "foto",
+    "menuLink": "",
+    "menuTexto": "",
+    "menuFotos": "(omitido en la corrida guardada — se cargaron 5 foto(s) real(es))"
+  },
+  "salida": {
+    "copy": "✨𝗜𝗟 𝗚𝗜𝗔𝗥𝗗𝗜𝗡𝗢✨\n\n¿Sabías que existe un bar con domos en Buenos Aires? Conocimos @ilgiardinoterrazaromagnoli, un lugar donde podés disfrutar de comer al aire libre incluso en pleno invierno porque tienen domos calefaccionados… ¡y hasta te dan mantitas! 🥹🧣\n\nNosotros probamos:\n🧀 Provoleta a la brasa ($18.000)\n🍄 Ñoquis con crema de hongos y trufa ($26.000)\n🥩 T-Bone Steak con puré ($65.000)\n\nPara tomar:\n🍸 Coctelería de autor\n\n✍🏼 DATOS:\n✅ Tienen un domo enorme ideal para cumples, reuniones y after office.\n✅ El salón interno es muy lindo y acogedor.\n\n☝🏼 Ideal para: citas, amigos, cumpleaños\n\n📍 Posadas 1017, Recoleta\n\n📲 Vos, ¿con quién vendrías a comer en un domo?\n\n#BaresCopados #Domos #BuenosAires #Citas #Coctelería",
+    "datosEstructurados": {
+      "emoji_tematico": "✨",
+      "nombre_lugar": "Il Giardino",
+      "apertura": "¿Sabías que existe un bar con domos en Buenos Aires? Conocimos @ilgiardinoterrazaromagnoli, un lugar donde podés disfrutar de comer al aire libre incluso en pleno invierno porque tienen domos calefaccionados… ¡y hasta te dan mantitas! 🥹🧣",
+      "encabezado_comida": "Nosotros probamos:",
+      "items_comida": [
+        {
+          "emoji": "🧀",
+          "item": "Provoleta a la brasa",
+          "precio": "$18.000"
+        },
+        {
+          "emoji": "🍄",
+          "item": "Ñoquis con crema de hongos y trufa",
+          "precio": "$26.000"
+        },
+        {
+          "emoji": "🥩",
+          "item": "T-Bone Steak con puré",
+          "precio": "$65.000"
+        }
+      ],
+      "items_bebida": [
+        {
+          "emoji": "🍸",
+          "item": "Coctelería de autor",
+          "precio": null
+        }
+      ],
+      "postre": null,
+      "datos": [
+        "Tienen un domo enorme ideal para cumples, reuniones y after office.",
+        "El salón interno es muy lindo y acogedor."
+      ],
+      "ideal_para": [
+        "citas",
+        "amigos",
+        "cumpleaños"
+      ],
+      "direccion": "Posadas 1017, Recoleta",
+      "cierre_emoji": "📲",
+      "cierre_pregunta": "Vos, ¿con quién vendrías a comer en un domo?",
+      "hashtags": [
+        "#BaresCopados",
+        "#Domos",
+        "#BuenosAires",
+        "#Citas",
+        "#Coctelería"
+      ],
+      "advertencias": null
+    },
+    "fuentes": [],
+    "modelo": "claude-haiku-4-5",
+    "usage": {
+      "input_tokens": 8189,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 5433,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 427,
+      "service_tier": "standard",
+      "inference_geo": "not_available"
+    },
+    "costo": {
+      "costoInputUSD": 0.008732,
+      "costoOutputUSD": 0.002135,
+      "costoTotalUSD": 0.010867
+    }
+  }
+}

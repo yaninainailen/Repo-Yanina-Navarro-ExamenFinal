@@ -65,20 +65,35 @@ Instrucciones principales, en orden, dadas a Claude Code:
 - **Desplegado y verificado en Vercel** con la clave real de Anthropic: `web_fetch` lee de
   verdad el menú de un link externo (ver [`corridas/corrida-1-mision.json`](corridas/corrida-1-mision.json),
   costo real US$ 0,0199 con `claude-haiku-4-5`).
+- **Modo Foto validado con un caso real de menú de varias hojas**: hasta 5 fotos JPEG por
+  corrida (comprimidas en el navegador antes de mandarlas, para no chocar con el límite de
+  tamaño de Vercel), leídas con visión nativa de Claude (ver
+  [`corridas/corrida-2-il-giardino.json`](corridas/corrida-2-il-giardino.json), costo real
+  US$ 0,0109 con `claude-haiku-4-5`).
+- El encabezado del bloque de comida varía entre corridas (elección acotada del modelo entre 5
+  frases aprobadas, no texto libre) en vez de salir siempre igual.
+- Cuando no hay un precio real para un plato/trago, el sistema lo menciona igual sin precio en
+  vez de inventar un número o esconderlo (`precio: null` en el JSON estructurado).
 
 ## Qué falta o qué falló
 
 *(Se actualiza a medida que se completan los puntos pendientes de `DECISIONES.md`.)*
 
-- Ya corrió la primera de las 3 corridas reales exigidas (Misión, modo Link) — faltan 2 más,
-  al menos una con el modo Foto (el pendiente que dejó abierto la Entrega 1, todavía sin
-  validar).
-- El modelo por defecto (`claude-haiku-4-5`) resultó preciso en la corrida 1 (no inventó
-  platos ni precios) — a confirmar con las 2 corridas que faltan antes de dar la elección por
-  cerrada.
-- Encontrados y corregidos dos bugs reales durante la primera prueba en producción: `web_fetch`
-  necesitaba `allowed_callers: ["direct"]` con Haiku 4.5, y el alfabeto Unicode del título en
-  negrita no soporta vocales acentuadas ni Ñ (ver capítulos 7 y 8 de `DECISIONES.md`).
+- Corrieron 2 de las 3 corridas reales exigidas (Misión por Link, Il Giardino por Foto con 5
+  imágenes) — falta 1 más, en un lugar nuevo, para cerrar las 3.
+- El modelo por defecto (`claude-haiku-4-5`) resultó preciso leyendo platos y precios reales en
+  las 2 corridas guardadas (tanto de un link como de fotos) — a confirmar con la corrida que
+  falta antes de dar la elección por cerrada.
+- Encontrados y corregidos varios bugs reales durante las pruebas en producción — el detalle
+  completo de cada uno está en `DECISIONES.md` (capítulos 7 a 14): `web_fetch` necesitaba
+  `allowed_callers: ["direct"]` con Haiku 4.5; el alfabeto Unicode del título en negrita no
+  soporta vocales acentuadas ni Ñ; el modo Foto solo aceptaba una imagen (los menús reales
+  tienen varias hojas); Vercel corta cualquier request a 4.5 MB (fotos de celular sin comprimir
+  la superaban); y el más interesante: un precio inventado que resultó ser una **contaminación
+  del few-shot** (copiado textual de uno de los ejemplos del contrato) y que, incluso después
+  de prohibirlo explícitamente, se seguía inventando porque el JSON Schema exigía un precio
+  como string obligatorio — la regla vivía en el prompt pero la obligación real vivía en la
+  estructura de datos, y hubo que arreglar el schema, no solo el texto.
 - Faltan las secciones de análisis económico (proyección semanal/anual) y de gobierno y riesgo.
 
 ## Qué aprendí

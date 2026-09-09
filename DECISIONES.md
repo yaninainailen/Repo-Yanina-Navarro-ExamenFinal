@@ -268,23 +268,46 @@ sostiene después de reforzarla en el prompt dos veces (capítulos 12 y 13), el 
 probablemente no es de redacción sino de que la estructura de datos no deja otra salida —
 conviene mirar el schema antes de seguir puliendo el texto de las instrucciones.
 
+## Capítulo 14 — corrida 2 (Il Giardino) validada de punta a punta (2026-09-09)
+
+Se repitió Il Giardino una tercera vez, ya con los tres fixes de los capítulos 12 y 13
+desplegados, y salió limpia:
+
+- Encabezado: **"Nosotros probamos:"** — distinto al "Para comer fuimos con:" de la corrida 1
+  (Misión). El campo `encabezado_comida` está funcionando como se esperaba.
+- Precios de comida con formato correcto: "$18.000", "$26.000", "$65.000" (separador de miles).
+- Bloque de bebida: **"🍸 Coctelería de autor"**, sin precio — el menú fotografiado no tenía un
+  precio real para esa categoría, y por primera vez el sistema lo dice mencionando el ítem en
+  vez de inventar un número o esconderlo. `precio: null` en el JSON, sin paréntesis en el texto
+  renderizado.
+- Costo: **US$ 0,0109** — más barato que las corridas anteriores porque esta vez pegó en el
+  cache de 5 minutos del system prompt (`cache_read_input_tokens: 5433`, `cache_creation: 0`) en
+  vez de tener que crearlo de nuevo.
+
+Queda guardada en [`corridas/corrida-2-il-giardino.json`](corridas/corrida-2-il-giardino.json).
+Con esto, el modo Foto (el pendiente puntual que dejó abierto el profesor desde la Entrega 1)
+queda validado de punta a punta con un caso real de menú de varias hojas.
+
+**Corridas: 2 de 3 completas.**
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
       caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
       Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Los platos y
-      precios reales siempre salieron correctos con Haiku 4.5 — los bugs de los capítulos 12 y
-      13 fueron de diseño del contrato/schema, no de precisión de lectura del modelo.)*
-- [ ] Repetir Il Giardino con el fix del capítulo 13 y guardar como corrida 2 en `corridas/`.
-      Correr 1 corrida más en un lugar nuevo (modo Link o Texto) para llegar a las 3 exigidas.
-- [ ] Análisis económico: costo real por corrida (hasta ahora ~US$ 0,016-0,020 por corrida con
-      Haiku 4.5), proyección semanal/anual según el ritmo real de @barescopados (1-2
-      posteos/semana).
+      precios reales siempre salieron correctos con Haiku 4.5 en las 2 corridas guardadas — los
+      bugs de los capítulos 12 y 13 fueron de diseño del contrato/schema, no de precisión de
+      lectura del modelo — evidencia a favor de quedarse con el modelo chico.)*
+- [ ] Correr 1 corrida más en un lugar nuevo (modo Link o Texto) para llegar a las 3 exigidas.
+- [ ] Análisis económico: costo real por corrida (rango observado US$ 0,011-0,020 con Haiku
+      4.5, según si pega en cache), proyección semanal/anual según el ritmo real de
+      @barescopados (1-2 posteos/semana).
 - [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
       publicar, quién firma, y los casos de los capítulos 9, 12 y 13 (fuente en conflicto,
       contaminación de few-shot, schema que forzaba a inventar precios).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
 - [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.
 - [x] Modo Foto: fix del 413 (compresión de imágenes antes de mandarlas) — capítulo 11.
-- [x] Modo Foto: validado con caso real (Il Giardino, 5 fotos) — capítulo 12.
+- [x] Modo Foto: validado con caso real (Il Giardino, 5 fotos) — capítulos 12-14.
 - [x] Precio inventado cuando no hay dato real: `precio` nullable en el schema — capítulo 13.
+- [x] Corrida 2 guardada (`corridas/corrida-2-il-giardino.json`) — capítulo 14.
