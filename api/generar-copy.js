@@ -94,24 +94,34 @@ ${datos.speech}`;
   } else if (datos.menuModo === "link") {
     texto += `\n\nEl menú con los precios está en este link: ${datos.menuLink}\nUsá la herramienta web_fetch para leer ese link y extraer los platos/tragos y precios que coincidan con lo mencionado en el speech.`;
   } else if (datos.menuModo === "foto") {
-    texto += `\n\nEl menú con los precios está en la imagen adjunta. Extraé de ahí los platos/tragos relevantes que coincidan con lo mencionado en el speech.`;
+    const cantidad = Array.isArray(datos.menuFotos) ? datos.menuFotos.length : 0;
+    texto += cantidad > 1
+      ? `\n\nEl menú con los precios está en las ${cantidad} imágenes adjuntas (son varias hojas del mismo menú). Mirá todas antes de responder y extraé de ahí los platos/tragos relevantes que coincidan con lo mencionado en el speech.`
+      : `\n\nEl menú con los precios está en la imagen adjunta. Extraé de ahí los platos/tragos relevantes que coincidan con lo mencionado en el speech.`;
   }
 
   return texto;
 }
 
+// Tope de seguridad del lado del servidor: aunque el frontend ya limita a 5 fotos antes de
+// mandar el pedido, no confiamos solo en la validación del cliente (alguien podría pegarle
+// directo al endpoint) — se vuelve a cortar acá.
+const MAX_FOTOS_MENU = 5;
+
 function construirContenidoUsuario(datos) {
   const contenido = [];
 
-  if (datos.menuModo === "foto" && datos.menuFotoBase64) {
-    contenido.push({
-      type: "image",
-      source: {
-        type: "base64",
-        media_type: datos.menuFotoMime || "image/jpeg",
-        data: datos.menuFotoBase64,
-      },
-    });
+  if (datos.menuModo === "foto" && Array.isArray(datos.menuFotos) && datos.menuFotos.length) {
+    for (const foto of datos.menuFotos.slice(0, MAX_FOTOS_MENU)) {
+      contenido.push({
+        type: "image",
+        source: {
+          type: "base64",
+          media_type: foto.mime || "image/jpeg",
+          data: foto.base64,
+        },
+      });
+    }
   }
 
   contenido.push({ type: "text", text: construirTextoUsuario(datos) });

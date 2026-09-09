@@ -39,7 +39,11 @@ async function datosFormulario() {
   ).map((el) => el.value);
 
   const menuModo = menuModeActivo();
-  const menuFotoFile = document.getElementById("menuFoto").files[0] || null;
+  // Los menús suelen tener varias hojas — se sacan varias fotos (siempre JPEG, cámara del
+  // celu) y se mandan todas juntas. Tope de 5 para no disparar el tamaño del pedido.
+  const MAX_FOTOS = 5;
+  const menuFotoFilesElegidos = Array.from(document.getElementById("menuFoto").files || []);
+  const menuFotoFiles = menuFotoFilesElegidos.slice(0, MAX_FOTOS);
 
   const datos = {
     nombreBar: document.getElementById("nombreBar").value.trim(),
@@ -52,9 +56,14 @@ async function datosFormulario() {
     menuTexto: document.getElementById("menuTexto").value.trim(),
   };
 
-  if (menuModo === "foto" && menuFotoFile) {
-    datos.menuFotoBase64 = await fileToBase64(menuFotoFile);
-    datos.menuFotoMime = menuFotoFile.type || "image/jpeg";
+  if (menuModo === "foto" && menuFotoFiles.length) {
+    datos.menuFotos = await Promise.all(
+      menuFotoFiles.map(async (file) => ({
+        base64: await fileToBase64(file),
+        mime: file.type || "image/jpeg",
+      }))
+    );
+    datos._fotosDescartadasPorLimite = menuFotoFilesElegidos.length - menuFotoFiles.length;
   }
 
   return datos;
@@ -127,6 +136,9 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  const fotosDescartadas = datos._fotosDescartadasPorLimite || 0;
+  delete datos._fotosDescartadasPorLimite;
+
   resultCard.classList.remove("hidden");
   loading.classList.remove("hidden");
   resultado.value = "";
@@ -142,7 +154,8 @@ form.addEventListener("submit", async (e) => {
     resultado.value = data.copy;
     fuentesDiv.textContent = formatearFuentes(data.fuentes);
     fuentesToggleWrap.classList.remove("hidden");
-    metaCorrida.textContent = formatearMeta(data);
+    metaCorrida.textContent = formatearMeta(data) +
+      (fotosDescartadas > 0 ? ` · ⚠️ Se ignoraron ${fotosDescartadas} foto(s) por pasar el máximo de 5.` : "");
 
     ultimaCorrida = {
       fecha: new Date().toISOString(),
@@ -178,11 +191,11 @@ guardarCorridaBtn.addEventListener("click", () => {
     return;
   }
 
-  // No guardamos la foto en base64 en la corrida (pesa mucho y no aporta al análisis);
-  // dejamos una nota de que el menú se cargó como imagen.
+  // No guardamos las fotos en base64 en la corrida (pesan mucho y no aportan al análisis);
+  // dejamos una nota de cuántas imágenes reales se cargaron.
   const entradaLimpia = { ...ultimaCorrida.entrada };
-  if (entradaLimpia.menuFotoBase64) {
-    entradaLimpia.menuFotoBase64 = "(omitido en la corrida guardada — se cargó una foto real)";
+  if (entradaLimpia.menuFotos && entradaLimpia.menuFotos.length) {
+    entradaLimpia.menuFotos = `(omitido en la corrida guardada — se cargaron ${entradaLimpia.menuFotos.length} foto(s) real(es))`;
   }
 
   const contenido = JSON.stringify(

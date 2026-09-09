@@ -134,17 +134,49 @@ no lo señala, solo elige silenciosamente la fuente del menú.
 
 **Corridas: 1 de 3 completas.**
 
-## Pendiente al momento de escribir esto (2026-09-08)
+## Capítulo 10 — corrida repetida desde el celular, y limitación real del modo Foto (2026-09-09)
+
+Se repitió el caso Misión desde el celular (mismo lugar que la corrida 1, para validar el flujo
+completo desde mobile) y salió bien: título en bold sin romperse (confirma el fix del capítulo
+8 con un segundo caso real), platos y precios correctos contra el menú real, y la regla de
+"desde $X" del capítulo 4 aplicada bien (`🍸 Tragos de autor (desde $22.000)`, el precio más
+bajo real de esa categoría). Costo: US$ 0,0198, casi idéntico a la corrida 1. No se guarda como
+corrida nueva del trabajo final porque es el mismo lugar — queda como evidencia adicional del
+fix, no como una de las 3 corridas exigidas.
+
+Al intentar probar el modo Foto por primera vez con un caso real apareció una limitación que no
+se había contemplado: el modo Foto solo soportaba **una** imagen, pero los menús reales casi
+siempre tienen varias hojas (se sacan varias fotos con el celular, formato JPEG por default de
+la cámara). Con una sola foto permitida, el modo Foto era inutilizable para el caso real.
+
+Se corrigió en los tres lugares que tocan el modo Foto:
+- `index.html`: el input de archivo pasa de aceptar un solo archivo a `multiple`, limitado a
+  `image/jpeg` (el formato real que usa la usuaria, no cualquier imagen).
+- `script.js`: en vez de mandar `menuFotoBase64`/`menuFotoMime` (un solo par), ahora arma un
+  array `menuFotos` (hasta 5, se recortan las de más con un aviso en pantalla si se cargaron
+  más).
+- `api/generar-copy.js`: `construirContenidoUsuario` agrega un bloque `image` por cada foto del
+  array (con el mismo tope de 5 repetido del lado del servidor, para no depender solo de la
+  validación del navegador si alguien llama al endpoint directo), y el texto que acompaña al
+  pedido le avisa a Claude cuántas imágenes está viendo cuando son varias hojas del mismo menú.
+
+Con esto el modo Foto queda listo para probarse de verdad con un caso real de varias hojas —
+sigue pendiente esa corrida.
+
+## Pendiente al momento de escribir esto (2026-09-09)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
       caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
-      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(La corrida 1 salió
-      correcta con Haiku 4.5 — evidencia a favor de quedarse con el modelo chico, a confirmar
-      con las 2 corridas que faltan.)*
-- [ ] Correr las 2 corridas reales que faltan (2 lugares nuevos, al menos uno con foto real del
-      menú) y guardarlas en `corridas/`.
-- [ ] Análisis económico: costo real por corrida (ya tenemos el dato de la corrida 1: US$ 0,0199),
-      proyección semanal/anual según el ritmo real de @barescopados (1-2 posteos/semana).
+      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Dos corridas
+      seguidas con Misión salieron correctas con Haiku 4.5 — evidencia a favor de quedarse con
+      el modelo chico, a confirmar con las corridas en lugares nuevos que faltan.)*
+- [ ] Correr las 2 corridas reales que faltan, en lugares nuevos (no Misión) — al menos una en
+      modo Foto con varias hojas del menú, ahora que soporta hasta 5 imágenes — y guardarlas en
+      `corridas/`.
+- [ ] Análisis económico: costo real por corrida (por ahora dos datos, ambos ~US$ 0,0198-0,0199
+      con Haiku 4.5), proyección semanal/anual según el ritmo real de @barescopados (1-2
+      posteos/semana).
 - [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
       publicar, quién firma, y el caso del capítulo 9 (speech vs. menú en conflicto).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
+- [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.

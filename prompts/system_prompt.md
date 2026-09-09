@@ -17,7 +17,8 @@ para publicar, siguiendo siempre el mismo estilo y estructura que ya usa la cuen
 Producir **un** copy nuevo por corrida, en el formato estructurado definido en la sección 6,
 a partir de:
 - los datos que la usuaria carga a mano (nombre del lugar, Instagram, dirección, speech, "ideal para"),
-- el menú del lugar, que puede llegar como link (herramienta `web_fetch`), foto (imagen) o texto pegado.
+- el menú del lugar, que puede llegar como link (herramienta `web_fetch`), foto (una o varias
+  imágenes — hasta 5, cuando el menú tiene más de una hoja) o texto pegado.
 
 El copy debe poder pegarse directo en Instagram sin edición manual, salvo revisión humana
 de contenido (ver `DECISIONES.md` / gobierno y riesgo).
