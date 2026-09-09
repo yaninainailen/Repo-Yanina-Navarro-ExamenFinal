@@ -118,12 +118,19 @@ function construirContenidoUsuario(datos) {
   return contenido;
 }
 
-// Unicode "Mathematical Sans-Bold" — el backend hace esta transformacion, no el
-// modelo, para que el formato del titulo sea siempre identico entre corridas.
+// Unicode "Mathematical Sans-Bold" no tiene variantes acentuadas (Á, É, Í, Ó, Ú, Ñ) —
+// si no se les saca el acento antes, esas letras quedan sin convertir y rompen el look
+// del título (mezcla de fuente normal y bold a la mitad de una palabra). Por eso se
+// normaliza el texto (quitando tildes) antes de mapear letra por letra.
 function aNegritaSansMayuscula(texto) {
   const INICIO_MAYUSCULAS = 0x1d5d4;
   const INICIO_DIGITOS = 0x1d7ec;
-  return texto
+  // NFD descompone cada letra acentuada (incluida la Ñ) en la letra base + un caracter
+  // "combinante" separado (la tilde); al sacar ese rango de caracteres combinantes queda
+  // solo la letra base, lista para mapear a su version bold.
+  const RANGO_COMBINANTES = new RegExp(String.fromCharCode(0x5b, 0x5c, 0x75, 0x30, 0x33, 0x30, 0x30, 0x2d, 0x5c, 0x75, 0x30, 0x33, 0x36, 0x66, 0x5d), "g");
+  const sinTildes = texto.normalize("NFD").replace(RANGO_COMBINANTES, "");
+  return sinTildes
     .toUpperCase()
     .split("")
     .map((ch) => {

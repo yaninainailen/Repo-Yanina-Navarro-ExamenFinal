@@ -99,6 +99,21 @@ mensaje genérico `data.error` y descartaba `data.detalle` (donde el backend sí
 real). Se corrigió para que el detalle completo aparezca en pantalla — así, si vuelve a fallar
 algo, no hace falta ir a mirar los Logs de Vercel para diagnosticarlo.
 
+## Capítulo 8 — bug de formato: la Ñ y las tildes rompían la negrita del título (2026-09-08)
+
+Con el fix del capítulo 7, la corrida de Misión funcionó de punta a punta por primera vez —
+pero el título salió como "🕺𝗠𝗜𝗦𝗜Ó𝗡🕺" con la O tildada en fuente normal en vez de bold: el
+alfabeto Unicode "Mathematical Sans-Bold" no tiene versión acentuada de las vocales ni de la Ñ,
+así que esos caracteres pasaban sin transformar por `aNegritaSansMayuscula` y quedaban
+mezclados con el resto del título en negrita.
+
+Se corrigió en el backend (no en el prompt): antes de mapear cada letra a su versión bold, el
+texto pasa por `.normalize("NFD")`, que descompone cada letra acentuada en la letra base + un
+caracter "combinante" separado (la tilde), y después se descartan esos caracteres combinantes.
+Así "Ó" se convierte en "O" (y "Ñ" en "N") antes de la conversión a bold, sin depender de que
+el modelo evite tildes por su cuenta en cada corrida — la garantía queda en el código, no en
+una instrucción que el modelo podría no seguir siempre.
+
 ## Pendiente al momento de escribir esto (2026-09-08)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
