@@ -21,15 +21,38 @@ function menuModeActivo() {
 }
 
 // ---------- Helpers ----------
-function fileToBase64(file) {
+// Vercel corta cualquier request a una función serverless en 4.5 MB de body (límite fijo de
+// la plataforma, no se puede subir ni pagando). Una foto de menú sacada con la cámara de un
+// celu pesa varios MB — con 2 o 3 fotos ya se pasa. Por eso cada foto se redibuja en un canvas
+// más chico y se recomprime como JPEG antes de mandarla: el texto del menú sigue siendo
+// legible para la visión de Claude, pero el peso baja de MB a cientos de KB.
+const FOTO_LADO_MAXIMO_PX = 1600;
+const FOTO_CALIDAD_JPEG = 0.75;
+
+function comprimirFotoABase64(file) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const [, base64] = reader.result.split(",");
-      resolve(base64);
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+      if (width > FOTO_LADO_MAXIMO_PX || height > FOTO_LADO_MAXIMO_PX) {
+        const factor = FOTO_LADO_MAXIMO_PX / Math.max(width, height);
+        width = Math.round(width * factor);
+        height = Math.round(height * factor);
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+      URL.revokeObjectURL(url);
+      const dataUrl = canvas.toDataURL("image/jpeg", FOTO_CALIDAD_JPEG);
+      resolve(dataUrl.split(",")[1]);
     };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+    img.onerror = (e) => {
+      URL.revokeObjectURL(url);
+      reject(e);
+    };
+    img.src = url;
   });
 }
 
@@ -59,8 +82,8 @@ async function datosFormulario() {
   if (menuModo === "foto" && menuFotoFiles.length) {
     datos.menuFotos = await Promise.all(
       menuFotoFiles.map(async (file) => ({
-        base64: await fileToBase64(file),
-        mime: file.type || "image/jpeg",
+        base64: await comprimirFotoABase64(file),
+        mime: "image/jpeg", // se recomprime siempre a JPEG, sea cual sea el formato original
       }))
     );
     datos._fotosDescartadasPorLimite = menuFotoFilesElegidos.length - menuFotoFiles.length;
@@ -138,6 +161,18 @@ form.addEventListener("submit", async (e) => {
 
   const fotosDescartadas = datos._fotosDescartadasPorLimite || 0;
   delete datos._fotosDescartadasPorLimite;
+
+  // Red de seguridad extra: aunque cada foto se comprime antes de armar el pedido, si por lo
+  // que sea el total sigue pesando mucho (menú con muchísimo detalle, fotos gigantes) avisamos
+  // ANTES de mandar el pedido y recibir un 413 de Vercel sin explicación.
+  if (datos.menuFotos && datos.menuFotos.length) {
+    const bytesAprox = datos.menuFotos.reduce((total, f) => total + f.base64.length * 0.75, 0);
+    const LIMITE_BYTES = 3.5 * 1024 * 1024;
+    if (bytesAprox > LIMITE_BYTES) {
+      mostrarError(`Las fotos del menú pesan demasiado incluso comprimidas (~${(bytesAprox / 1024 / 1024).toFixed(1)} MB). Probá con menos fotos, o cargá el menú por Link o Texto.`);
+      return;
+    }
+  }
 
   resultCard.classList.remove("hidden");
   loading.classList.remove("hidden");

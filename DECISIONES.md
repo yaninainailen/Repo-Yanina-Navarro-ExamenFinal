@@ -163,6 +163,30 @@ Se corrigió en los tres lugares que tocan el modo Foto:
 Con esto el modo Foto queda listo para probarse de verdad con un caso real de varias hojas —
 sigue pendiente esa corrida.
 
+## Capítulo 11 — segundo error real en producción: 413, el body pasaba el límite de Vercel (2026-09-09)
+
+Con el fix del capítulo 10 ya desplegado, la primera prueba real del modo Foto multi-imagen
+(varias fotos sacadas con la cámara del iPhone) falló al toque:
+
+```
+Status: 413 (FUNCTION_PAYLOAD_TOO_LARGE)
+```
+
+Vercel limita el body de cualquier función serverless a **4.5 MB**, un tope fijo de la
+plataforma (no depende del plan, no se puede subir por configuración). Una foto de menú sacada
+directo con la cámara de un celular pesa varios MB — codificada en base64 (que agrega ~33% de
+peso) y con 2 o 3 fotos juntas en el mismo pedido, se pasa del límite fácilmente. El error de
+Vercel no da más detalle que el código HTTP, pero el nombre (`FUNCTION_PAYLOAD_TOO_LARGE`) y el
+tamaño real de las fotos elegidas explican la causa sin ambigüedad.
+
+La solución no es subir el límite (no se puede) sino no mandar el archivo original: en
+`script.js`, `comprimirFotoABase64()` redibuja cada foto en un `<canvas>` acotado a 1600px de
+lado máximo y la recodifica como JPEG con calidad 0.75 antes de convertir a base64 — el texto
+del menú sigue siendo legible para la visión de Claude, pero el peso baja de varios MB a
+cientos de KB por foto. Además se agregó una verificación en el frontend antes de mandar el
+pedido (si el total comprimido igual supera ~3,5 MB, se avisa en pantalla en vez de dejar que
+falle en el servidor con un 413 sin contexto).
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
@@ -180,3 +204,4 @@ sigue pendiente esa corrida.
       publicar, quién firma, y el caso del capítulo 9 (speech vs. menú en conflicto).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
 - [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.
+- [x] Modo Foto: fix del 413 (compresión de imágenes antes de mandarlas) — capítulo 11.
