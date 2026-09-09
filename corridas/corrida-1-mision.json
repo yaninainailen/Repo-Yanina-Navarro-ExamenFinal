@@ -1,0 +1,118 @@
+{
+  "fecha": "2026-09-09T00:54:52.736Z",
+  "entrada": {
+    "nombreBar": "Misión",
+    "instagramLugar": "@mision.ba",
+    "direccion": "Godoy Cruz 1715, Palermo",
+    "speech": "Este bar tiene un secreto en el baño… y no es lo que vos pensás. Bienvenidos a Misión.\n\nUn bar con un ambiente increíble, muy buena comida y tragos, pero lo más insólito pasa cuando vas al baño.\n\nPorque sí, ¡hay un boliche adentro! Con DJ, música y gente bailando en un lugar donde definitivamente no esperábamos terminar la noche.\n\nPero antes de terminar bailando en el baño, vinimos a cenar, y arrancamos con esta provoleta con compota de higos, unas mollejas con papines y puré de coliflor que estaba riquísima, el salmón con vegetales y salsa de puerro y un ojo de bife con puré de batata y criolla que a lucho le encantó.\n\nPara tomar probamos los tragos de autor que habia en la carta y la verdad que estuvieron muy buenos todos.\n\nY como te spoileamos al principio, después de la cena sube la música, aparece la DJ y podés terminar la noche tirando unos pasos en el baño y sacandote unas fotitos.\n\n¿Vos von quien irías?\n\nGuardate este lugar, seguinos en @barescopados para más recomendaciones y te dejamos mas la info y precios en la descripción.",
+    "idealPara": [
+      "citas",
+      "amigos"
+    ],
+    "menuModo": "link",
+    "menuLink": "https://queresto.com/misionbar",
+    "menuTexto": ""
+  },
+  "salida": {
+    "copy": "🕺𝗠𝗜𝗦𝗜Ó𝗡🕺\n\nConocimos @mision.ba, un bar con un ambiente increíble en Palermo donde la verdadera magia sucede... ¡en el baño! Porque sí, adentro hay un boliche completo con DJ, música y gente bailando en un lugar donde definitivamente no esperabas terminar la noche 🎶\n\nPara comer fuimos con:\n🧀 Provoleta Gratinada con compota de mango ($27.000)\n🫘 Mollejas Teriyaki con papines andinos y puré de coliflor ($29.000)\n🐟 Pesca fresca a la plancha con puré de brócoli ($41.000)\n🥩 Ojo de Bife con puré de batata y criolla ($47.000)\n\nPara tomar:\n🍸 Tragos de autor (desde $22.000)\n\n✍🏼 DATOS:\n✅ Abre para cenar y después sube la música para bailar en la noche.\n✅ El boliche funciona adentro del baño con DJ en vivo.\n\n☝🏼 Ideal para: citas, amigos\n\n📍 Godoy Cruz 1715, Palermo\n\n💬 ¿Con quién irías a Misión para terminar bailando en el baño?\n\n#BaresCopados #BolicheSorpresa #Palermo #Cocteleria #CenaYBaile",
+    "datosEstructurados": {
+      "emoji_tematico": "🕺",
+      "nombre_lugar": "Misión",
+      "apertura": "Conocimos @mision.ba, un bar con un ambiente increíble en Palermo donde la verdadera magia sucede... ¡en el baño! Porque sí, adentro hay un boliche completo con DJ, música y gente bailando en un lugar donde definitivamente no esperabas terminar la noche 🎶",
+      "items_comida": [
+        {
+          "emoji": "🧀",
+          "item": "Provoleta Gratinada con compota de mango",
+          "precio": "$27.000"
+        },
+        {
+          "emoji": "🫘",
+          "item": "Mollejas Teriyaki con papines andinos y puré de coliflor",
+          "precio": "$29.000"
+        },
+        {
+          "emoji": "🐟",
+          "item": "Pesca fresca a la plancha con puré de brócoli",
+          "precio": "$41.000"
+        },
+        {
+          "emoji": "🥩",
+          "item": "Ojo de Bife con puré de batata y criolla",
+          "precio": "$47.000"
+        }
+      ],
+      "items_bebida": [
+        {
+          "emoji": "🍸",
+          "item": "Tragos de autor",
+          "precio": "desde $22.000"
+        }
+      ],
+      "postre": null,
+      "datos": [
+        "Abre para cenar y después sube la música para bailar en la noche.",
+        "El boliche funciona adentro del baño con DJ en vivo."
+      ],
+      "ideal_para": [
+        "citas",
+        "amigos"
+      ],
+      "direccion": "Godoy Cruz 1715, Palermo",
+      "cierre_emoji": "💬",
+      "cierre_pregunta": "¿Con quién irías a Misión para terminar bailando en el baño?",
+      "hashtags": [
+        "#BaresCopados",
+        "#BolicheSorpresa",
+        "#Palermo",
+        "#Cocteleria",
+        "#CenaYBaile"
+      ],
+      "advertencias": null
+    },
+    "fuentes": [
+      {
+        "tipo": "solicitud",
+        "url": "https://queresto.com/misionbar"
+      },
+      {
+        "tipo": "resultado",
+        "detalle": {
+          "type": "web_fetch_result",
+          "url": "https://queresto.com/misionbar",
+          "retrieved_at": "2026-09-09T00:54:37.578087",
+          "content": {
+            "type": "document",
+            "source": {
+              "type": "text",
+              "media_type": "text/plain",
+              "data": "---\ncanonical: https://queresto.com/misionbar\nmeta-description: Ver la carta, horarios, teléfono, WhatsApp y cómo llegar de Mision Bar en Ciudad Autónoma de Buenos Aires, Argentina.\nmeta-og:description: Ver la carta, horarios, teléfono, WhatsApp y cómo llegar de Mision Bar en Ciudad Autónoma de Buenos Aires, Argentina.\nmeta-og:image: https://cdn.bistrify.app/images/logos/f66e3ede-eba7-4ff1-a83d-95a09695ddd6.jpg\nmeta-og:site_name: QueRestó\nmeta-og:title: Mision Bar • Menú, Precios y Dirección\nmeta-og:url: https://queresto.com/misionbar\nmeta-robots: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1\nmeta-twitter:card: summary_large_image\nmeta-twitter:description: Ver la carta, horarios, teléfono, WhatsApp y cómo llegar de Mision Bar en Ciudad Autónoma de Buenos Aires, Argentina.\nmeta-twitter:image: https://cdn.bistrify.app/images/logos/f66e3ede-eba7-4ff1-a83d-95a09695ddd6.jpg\nmeta-twitter:title: Mision Bar • Menú, Precios y Dirección\nmeta-viewport: width=device-width, initial-scale=1\ntitle: Mision Bar • Menú, Precios y Dirección\n---\n\n![Logo de Mision Bar](https://queresto.com/images/storelogo_placeholder@0.5x.png)Mision Bar\n\n![Banner de Mision Bar](https://queresto.com/images/placeholder_transparent.png)\n\n![Logo de Mision Bar](https://queresto.com/images/storelogo_placeholder@0.5x.png)\n\n# Mision Bar\n\n@mision.ba\n\n[WhatsApp](https://wa.me/5491170991715?text=Hola%2C%20estoy%20viendo%20su%20men%C3%BA%20en%20QueResto.com%20y%20me%20gustar%C3%ADa%20hacer%20una%20consulta.)\n\nDonde estamos\n\nGodoy Cruz 1715\n\n[Abrir Maps](https://www.google.com/maps/search/?api=1&query=-34.58744100165612,-58.4337204694748)\n\nMenú\n\nEntradas\n\nPrincipales\n\nEnsaladas\n\nSushi\n\nPostres\n\nCocteleria de Autor\n\nCocteleria Clasica\n\nBebidas\n\nCocktails con Red Bull\n\nNuestra Cava\n\nEspumantes\n\nBottle Service\n\nMedidas\n\n## Entradas\n\n[Foto de Pulpo Pulpoacompañado con puré de Boniato ahumado, pickles y aceite picante$ 50000](https://queresto.com/misionbar/#/item/986916)[Ceviche de langostinosCon chips, boniato en almibar, choclo, maiz frito, lechuga y cebolla morada$ 27000](https://queresto.com/misionbar/#/item/986901)[Ceviche pesca frescaCon chips, boniato en almibar, choclo, maiz frito, lechuga y cebolla morada$ 25000](https://queresto.com/misionbar/#/item/1105257)[Miniaturas de pescadoEn tempura con mayonesa verde$ 27000](https://queresto.com/misionbar/#/item/1105246)[Foto de Mollejas Teriyaki Mollejas TeriyakiMollejas de corazón en teriyaki, papines andinos con puré de coliflor y cebolla caramelizada. $ 29000](https://queresto.com/misionbar/#/item/986906)[Empanadas de osobucoCon pesto de tomate. x2 unidades$ 19000](https://queresto.com/misionbar/#/item/1105245)[Foto de Provoleta Gratinada Provoleta Gratinada con compota de mango$ 27000](https://queresto.com/misionbar/#/item/986902)\n\n## Principales\n\n[Pesca frescaA la plancha con pure de brocoli y girasol tostado, en cama de espárragos y papines salteados$ 41000](https://queresto.com/misionbar/#/item/1105249)[Foto de Ojo de Bife Ojo de Bife Ojo de Bife de 350 gr con reducción de malbec, acompañado de puré salado de batata y toffee, con un dip de criolla.$ 47000](https://queresto.com/misionbar/#/item/986911)[Foto de Milanesa con pure Milanesa con pureMilanesa de nalga en panko con pure de papas trufado$ 43000](https://queresto.com/misionbar/#/item/1016052)[Arroz negroCon mariscos y alioli$ 36000](https://queresto.com/misionbar/#/item/1105250)[Foto de Sorrentinos de Pulpo Sorrentinos de PulpoCon salsa a base de salvia fresca, hondashi y pangratatto.$ 31000](https://queresto.com/misionbar/#/item/986914)[Sorrentinos de cabutiaCon salsa de hongos y miso$ 31000](https://queresto.com/misionbar/#/item/1105251)\n\n## Ensaladas\n\n[Ensalada CaesarMezclum de verdes, pollo grillé, parmesano rallado, croutons y aderezo Caesar$ 26000](https://queresto.com/misionbar/#/item/986918)[Foto de Ensalada Cobb Ensalada CobbSalmón, mezclum de verdes, cherrys frescos, palta y choclo. $ 26000](https://queresto.com/misionbar/#/item/986919)\n\n## Sushi\n\n[Mix de 10 PiezasA elección del sushiman (NIGIRIS TIENEN COSTO ADICIONAL) $ 33000](https://queresto.com/misionbar/#/item/987432)[Mix de 20 PiezasA elección del sushiman (NIGIRIS TIENEN COSTO ADICIONAL)$ 62000](https://queresto.com/misionbar/#/item/987434)[Foto de Mix de 30 Piezas Mix de 30 PiezasA elección del sushiman (NIGIRIS TIENEN COSTO ADICIONAL)$ 81000](https://queresto.com/misionbar/#/item/987436)[New York (ura maki)queso philadelphia, palta y salmón cubierto de semillas de sésamo](https://queresto.com/misionbar/#/item/1105255)[Philadelphia (ura)queso philadelphia ahumado y salmón, cubierto de sésamo tostado](https://queresto.com/misionbar/#/item/1105254)[California (ura)kanikama, palta, queso Philadelphia, cubierto de polvo de alga nori picante](https://queresto.com/misionbar/#/item/986928)[Reversión california (ura)queso Philadelphia y palta, cubierto de tartar de kanikama, teriyaki e hilos de boniato](https://queresto.com/misionbar/#/item/1105253)[Gunkan (hoso)pepino, cubierto por tartar de salmón y mango con salsa acevichada e hilos de boniato](https://queresto.com/misionbar/#/item/986926)[Golden Roll (ura)Langostino al ajillo, palta, queso Philadelphia, cubierto por salmón flambeado y salsa ponzu](https://queresto.com/misionbar/#/item/986927)[Tuna (ura)Lomo de atún cocido y queso Philadelphia con salsa de miel picante, hilos de boniato](https://queresto.com/misionbar/#/item/1016056)[Tempura roll (ura)langostinos en tempura, palta y philadelphia, salsa fuji](https://queresto.com/misionbar/#/item/1105252)[Foto de Nigiri de salmon Nigiri de salmoncon salsa ponzu, 5 UNIDADES$ 22000](https://queresto.com/misionbar/#/item/986924)\n\n## Postres\n\n[Creme BruleePostre frances de crema de vainilla y azucar caramelizada$ 16000](https://queresto.com/misionbar/#/item/995403)[Foto de Marquise de Chocolate Marquise de Chocolate Lingote de chocolate amargo, bañado con chocolate y maní, con helado de crema americana.$ 16000](https://queresto.com/misionbar/#/item/995405)\n\n## Cocteleria de Autor\n\n[TokioWhisky Red Label, maracuya, miel de cardamomo, naranja, ananá.$ 22000](https://queresto.com/misionbar/#/item/986955)[MuninVodka Smirnoff de frambuesa, Aperol, syrup de lychee, jugo de lima, menta, frutos rojos.$ 22000](https://queresto.com/misionbar/#/item/986961)[MelekGin Gordons, miel de maracuya, bitter Plum Fee Brothers, jugo de limón. $ 22000](https://queresto.com/misionbar/#/item/1016204)[MauiRon dorado, licor Rasta Chai By Tealosophy, miel canela y cardamomo, jugo de ananá, jugo de limón, jugo de jengibre. $ 22000](https://queresto.com/misionbar/#/item/986965)\n\n## Cocteleria Clasica\n\n[Gin Tonic Gin Gordons, agua tonica $ 19000](https://queresto.com/misionbar/#/item/986971)[Aperol SpritzAperol, chandon extra brut.$ 19000](https://queresto.com/misionbar/#/item/986973)[Old FashionedWhisky bourbon. bitter angostura. almíbar simple.$ 19000](https://queresto.com/misionbar/#/item/986974)[BoulevardierWhisky bourbon. campari. vermut rosso.$ 19000](https://queresto.com/misionbar/#/item/986975)[ManhattanWhisky bourbon. vermut rosso. bitter angostura.$ 19000](https://queresto.com/misionbar/#/item/986976)[Dry martiniGin Gordons, vermut dry, aceituna$ 19000](https://queresto.com/misionbar/#/item/986977)[NegroniGin, vermut rosso, campari.$ 19000](https://queresto.com/misionbar/#/item/986978)[Negroni PerfettoGin Hendricks, campari, antica formula.$ 23000](https://queresto.com/misionbar/#/item/986986)[Pisco SourPisco 1615, limon, albumina, almíbar simple.$ 19000](https://queresto.com/misionbar/#/item/986987)[MargaritaTequila blanco, triple sec, limon, almibar simple.$ 19000](https://queresto.com/misionbar/#/item/986988)[PenicillinWhisky escoces, jengibre, limon, miel. $ 19000](https://queresto.com/misionbar/#/item/986989)[Moscow MuleVodka, limon, ginger ale, menta.$ 19000](https://queresto.com/misionbar/#/item/986990)[MojitoRon blanco, limon, almibar simple, menta, soda. $ 19000](https://queresto.com/misionbar/#/item/986991)[Cuba LibreRon dorado, coca cola, limon$ 19000](https://queresto.com/misionbar/#/item/986992)[Cynar JulepCynar, limon, almibar, jugo de pomelo, menta. $ 19000](https://queresto.com/misionbar/#/item/986993)[Fernet Branca ColaFernet, coca cola. $ 19000](https://queresto.com/misionbar/#/item/986994)[GaribaldiCampari, jugo de naranja. $ 19000](https://queresto.com/misionbar/#/item/986995)[CaipiroskaVodka, lima, almibar simple. opcional, maracuya o frutos rojos. $ 19000](https://queresto.com/misionbar/#/item/986996)[Caipirinhacachaca, lima, almibar simple. opcional, maracuya o frutos rojos. $ 19000](https://queresto.com/misionbar/#/item/986997)[Espresso MartiniCold brew, licor de cafe, vodka $ 19000](https://queresto.com/misionbar/#/item/1030617)[Daiquiri ClasicoRon, almibar, limon. opcional, maracuya o frutos rojos. (Batido, sin hielo) $ 19000](https://queresto.com/misionbar/#/item/993041)[MicheladaCerveza (con o sin alcohol), jugo de lima, salsa de ostras, opcional labiado de sal.$ 14000](https://queresto.com/misionbar/#/item/1030618)[Vodka Tonicvodka, agua tonica$ 19000](https://queresto.com/misionbar/#/item/1033806)[Tropical Meister Jagermeister, jugo de limon y maracuya $ 24000](https://queresto.com/misionbar/#/item/1059178)[Jagermeister SmashJagermeister, bourbon whiskey, jugo de limon, almibar y menta. $ 24000](https://queresto.com/misionbar/#/item/1059182)[Jagermeister OrangeJagermeister, jugo de naranja y top de tonica$ 24000](https://queresto.com/misionbar/#/item/1059180)\n\n## Bebidas\n\n[Gaseosa lata linea PepsiPepsi / Pepsi Black / 7 up / 7 up Free / Paso de los toros tonica$ 8000](https://queresto.com/misionbar/#/item/1088513)[Limonada , Menta y jengibre $ 9000](https://queresto.com/misionbar/#/item/986945)[Pomelada$ 9000](https://queresto.com/misionbar/#/item/990916)[Red Bull$ 12000](https://queresto.com/misionbar/#/item/986946)[Corona Porrón$ 12000](https://queresto.com/misionbar/#/item/986949)[Stella Artois Porrón$ 12000](https://queresto.com/misionbar/#/item/986950)[Corona sin alcohol Porrón$ 8000](https://queresto.com/misionbar/#/item/986947)[Stella Artois sin Alcohol Porrón$ 8000](https://queresto.com/misionbar/#/item/986948)\n\n## Cocktails con Red Bull\n\n[Red Bull VodkaRed Bull Energy Drink & Vodka$ 24000](https://queresto.com/misionbar/#/item/1025527)[Jager BombJager con Red Bull$ 24000](https://queresto.com/misionbar/#/item/1040444)[Red Bull Pomelo vodka$ 24000](https://queresto.com/misionbar/#/item/1092318)\n\n## Nuestra Cava\n\n[Terrazas de los Andes Blend Origen Paraje Altamira$ 42200](https://queresto.com/misionbar/#/item/1022300)[Terrazas de los Andes Malbec Rose $ 42200](https://queresto.com/misionbar/#/item/997741)[Terrazas de los Andes reserva Chardonnay$ 42200](https://queresto.com/misionbar/#/item/987136)[Terrazas de los Andes Origen de los Chacayes MalbecMalbec$ 42200](https://queresto.com/misionbar/#/item/1007144)[Terrazas de los Andes reserva Grand Malbec$ 61700](https://queresto.com/misionbar/#/item/1007143)[Terrazas De Los Andes Reserva Cabernet Sauvignon $ 42200](https://queresto.com/misionbar/#/item/1088520)[D.V. Catena Cabernet Malbec$ 54100](https://queresto.com/misionbar/#/item/987137)[Copa vino MalbecLa Linda Malbec $ 16000](https://queresto.com/misionbar/#/item/1040044)[Copa de vino Sauvignon BlancLa Linda Sauvignon Blanc$ 16000](https://queresto.com/misionbar/#/item/1040045)\n\n## Espumantes\n\n[Chandon Extra BrutExtra Brut / Rose / Delice / Delice Rose / Aperitif$ 79000](https://queresto.com/misionbar/#/item/987100)[Baron B Extra Brut / Rose / Brut Nature$ 135000](https://queresto.com/misionbar/#/item/987107)[Baron B rose $ 135000](https://queresto.com/misionbar/#/item/987108)[Veuve Clicquot Yellow Label Brut$ 590000](https://queresto.com/misionbar/#/item/987114)[Veuve Clicquot Rich$ 620000](https://queresto.com/misionbar/#/item/987115)[Veuve Clicquot Rose $ 736000](https://queresto.com/misionbar/#/item/987116)[Moet Brut Imperial$ 492000](https://queresto.com/misionbar/#/item/987110)[Moet Ice Imperial $ 558000](https://queresto.com/misionbar/#/item/987111)[Moet Rose Imperial $ 527000](https://queresto.com/misionbar/#/item/987112)[Dom Perignon $ 1446000](https://queresto.com/misionbar/#/item/987113)\n\n## Bottle Service\n\n[Tanqueray & Tonica $ 198000](https://queresto.com/misionbar/#/item/987041)[Bombay & Tonica $ 225000](https://queresto.com/misionbar/#/item/987042)[Absolut & 4 red bull$ 158000](https://queresto.com/misionbar/#/item/987049)[Absolut Saborizado & 4 red bull$ 213000](https://queresto.com/misionbar/#/item/987086)[Fernet Branca & Coca Cola $ 146000](https://queresto.com/misionbar/#/item/987087)[J Walker Red & Coca Cola $ 203000](https://queresto.com/misionbar/#/item/987089)[J Walker Black & Coca Cola $ 224000](https://queresto.com/misionbar/#/item/987088)[Jose Cuervo Silver$ 296000](https://queresto.com/misionbar/#/item/987090)[Havana 3 Años & Coca Cola $ 196600](https://queresto.com/misionbar/#/item/987094)[Jägermeister & 4 Red Bull$ 198000](https://queresto.com/misionbar/#/item/987095)[Belvedere$ 340000](https://queresto.com/misionbar/#/item/987093)[Grey Goose$ 342000](https://queresto.com/misionbar/#/item/987096)[Vodka Pravda$ 194000](https://queresto.com/misionbar/#/item/1043823)[Vodka Beluga$ 242000](https://queresto.com/misionbar/#/item/1047128)[Jack Daniel´s$ 272000](https://queresto.com/misionbar/#/item/1066859)\n\n## Medidas\n\n[Jose Cuervo SilverTequila$ 22000](https://queresto.com/misionbar/#/item/987005)[Jose Cuervo OroTequila$ 27000](https://queresto.com/misionbar/#/item/1043818)[Tequila Corralejo añejo$ 36000](https://queresto.com/misionbar/#/item/1043784)[Don JulioTequila añejado$ 42000](https://queresto.com/misionbar/#/item/1022844)[Jägermeister$ 19000](https://queresto.com/misionbar/#/item/987004)[Johnnie WalkerRed / Black / Doble Black / Gold / 18 Años / Blue](https://queresto.com/misionbar/#/item/987007)[ChivasRegal / Regal XV años / Regal 18 Años](https://queresto.com/misionbar/#/item/987014)[Jack Daniel's Clasico / Honey / Apple / Gentleman](https://queresto.com/misionbar/#/item/987019)[Jim Beam White$ 19000](https://queresto.com/misionbar/#/item/987022)[Maker's Mark$ 33000](https://queresto.com/misionbar/#/item/987023)[Monkey Shoulder$ 33000](https://queresto.com/misionbar/#/item/1043791)[Jameson$ 18000](https://queresto.com/misionbar/#/item/987024)[Tullamore dew](https://queresto.com/misionbar/#/item/1043796)[Glenfiddich](https://queresto.com/misionbar/#/item/987021)[Glenmorangie single malt 10 años](https://queresto.com/misionbar/#/item/987025)[Ardberg 10 años](https://queresto.com/misionbar/#/item/1043797)[Absolut](https://queresto.com/misionbar/#/item/987033)[Absolut Saborizado](https://queresto.com/misionbar/#/item/987034)[Absolut Elyx](https://queresto.com/misionbar/#/item/1043776)[Grey Goose](https://queresto.com/misionbar/#/item/987003)[Belvedere](https://queresto.com/misionbar/#/item/987032)[Vodka Beluga](https://queresto.com/misionbar/#/item/1043777)[Ron Havana Especial](https://queresto.com/misionbar/#/item/987035)[Havana Club 7 años](https://queresto.com/misionbar/#/item/1043783)[Appleton State Reserve 8 años](https://queresto.com/misionbar/#/item/1043804)[Hennessy V.S.](https://queresto.com/misionbar/#/item/987039)[Beefeater](https://queresto.com/misionbar/#/item/987026)[Bombay Shappire](https://queresto.com/misionbar/#/item/987027)[Tanqueray](https://queresto.com/misionbar/#/item/987028)[Tanqueray no.10](https://queresto.com/misionbar/#/item/1043798)[Hendrick's](https://queresto.com/misionbar/#/item/987036)[Hendricks Neptunia](https://queresto.com/misionbar/#/item/1043799)[Hendricks Floral](https://queresto.com/misionbar/#/item/1043800)[Monkey 47](https://queresto.com/misionbar/#/item/987038)[Gin Opihr](https://queresto.com/misionbar/#/item/1043773)[Gin Mare](https://queresto.com/misionbar/#/item/1043774)[Gin Le Tribute](https://queresto.com/misionbar/#/item/1043775)[Bulldog Gin](https://queresto.com/misionbar/#/item/1043801)[Gin Bosque](https://queresto.com/misionbar/#/item/1043802)[Cointreau](https://queresto.com/misionbar/#/item/987030)[Sambuca Averna](https://queresto.com/misionbar/#/item/1043778)[Sambuca Borghetti](https://queresto.com/misionbar/#/item/1043779)[Disaronno](https://queresto.com/misionbar/#/item/1043780)[Frangelico](https://queresto.com/misionbar/#/item/1043781)[Drambuie](https://queresto.com/misionbar/#/item/1043782)[Amarula](https://queresto.com/misionbar/#/item/1043786)[Licor de café Borghetti](https://queresto.com/misionbar/#/item/1043788)[Liquore Strega](https://queresto.com/misionbar/#/item/1043789)[Bailey´s](https://queresto.com/misionbar/#/item/1043792)[Grappa Candolini](https://queresto.com/misionbar/#/item/987040)[Lillet Blanc](https://queresto.com/misionbar/#/item/1043787)\n\n![Logo de Mision Bar](https://queresto.com/images/storelogo_placeholder@0.5x.png)\n\n### Mision Bar\n\n### Ubicación\n\nPrincipal\n\nGodoy Cruz 1715, Ciudad Autónoma de Buenos Aires\n\n### Contacto\n\n[+5491170991715](https://wa.me/5491170991715?text=Hola%2C%20estoy%20viendo%20su%20men%C3%BA%20en%20QueResto.com%20y%20me%20gustar%C3%ADa%20hacer%20una%20consulta.)\n\n© 2026 Mision BarHecho con ❤️ usando [QueResto.com](https://queresto.com/info)"
+            },
+            "title": "Mision Bar • Menú, Precios y Dirección"
+          }
+        }
+      }
+    ],
+    "modelo": "claude-haiku-4-5",
+    "usage": {
+      "input_tokens": 788,
+      "cache_creation_input_tokens": 12733,
+      "cache_read_input_tokens": 5086,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 12733,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 545,
+      "service_tier": "standard",
+      "inference_geo": "not_available",
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 1
+      }
+    },
+    "costo": {
+      "costoInputUSD": 0.017213,
+      "costoOutputUSD": 0.002725,
+      "costoTotalUSD": 0.019938
+    }
+  }
+}

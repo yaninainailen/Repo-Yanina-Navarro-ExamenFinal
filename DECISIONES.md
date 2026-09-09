@@ -114,15 +114,37 @@ Así "Ó" se convierte en "O" (y "Ñ" en "N") antes de la conversión a bold, si
 el modelo evite tildes por su cuenta en cada corrida — la garantía queda en el código, no en
 una instrucción que el modelo podría no seguir siempre.
 
+## Capítulo 9 — corrida 1 (Misión) validada de punta a punta (2026-09-08)
+
+Con los dos fixes de los capítulos 7 y 8 ya desplegados, se repitió el caso Misión y salió
+limpio. Queda guardada en [`corridas/corrida-1-mision.json`](corridas/corrida-1-mision.json),
+con el flujo completo real: entrada (nombre, Instagram, dirección, speech completo, link del
+menú), la llamada real a `web_fetch` (se ve en `fuentes` que efectivamente leyó
+`queresto.com/misionbar` y trajo el menú completo con precios), el JSON estructurado que
+devolvió el modelo, el copy ya renderizado, y el costo real: **US$ 0,0199** (788 tokens de
+entrada, 545 de salida, más creación/lectura de cache), con `claude-haiku-4-5`.
+
+Un detalle a favor de que el agente está priorizando bien la fuente correcta: en el speech se
+mencionó "provoleta con compota de **higos**", pero el menú real dice "compota de **mango**"
+— el agente usó el dato del menú (verificable) en vez de lo dicho en el speech (memoria,
+posiblemente imprecisa). Es el comportamiento deseado, pero abre una pregunta para la sección
+de Gobierno y riesgo: ¿qué pasa cuando el speech y el menú no coinciden y la diferencia importa
+más que un ingrediente (ej. un precio desactualizado en el menú online)? Por ahora el sistema
+no lo señala, solo elige silenciosamente la fuente del menú.
+
+**Corridas: 1 de 3 completas.**
+
 ## Pendiente al momento de escribir esto (2026-09-08)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
       caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
-      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá.
-- [ ] Correr las 3 corridas reales (Misión + 2 lugares nuevos, al menos uno con foto real del
+      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(La corrida 1 salió
+      correcta con Haiku 4.5 — evidencia a favor de quedarse con el modelo chico, a confirmar
+      con las 2 corridas que faltan.)*
+- [ ] Correr las 2 corridas reales que faltan (2 lugares nuevos, al menos uno con foto real del
       menú) y guardarlas en `corridas/`.
-- [ ] Análisis económico: costo real por corrida (tokens de la corrida de Misión), proyección
-      semanal/anual según el ritmo real de @barescopados (1-2 posteos/semana).
+- [ ] Análisis económico: costo real por corrida (ya tenemos el dato de la corrida 1: US$ 0,0199),
+      proyección semanal/anual según el ritmo real de @barescopados (1-2 posteos/semana).
 - [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
-      publicar, quién firma.
-- [ ] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
+      publicar, quién firma, y el caso del capítulo 9 (speech vs. menú en conflicto).
+- [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.

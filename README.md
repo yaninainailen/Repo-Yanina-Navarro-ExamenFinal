@@ -62,16 +62,23 @@ Instrucciones principales, en orden, dadas a Claude Code:
   de a Gemini directo — ya no pide ni guarda ninguna clave en el navegador.
 - Botón "Guardar esta corrida": descarga automáticamente entrada + salida + fecha en el
   formato que exige `corridas/`, sin copiar/pegar a mano.
+- **Desplegado y verificado en Vercel** con la clave real de Anthropic: `web_fetch` lee de
+  verdad el menú de un link externo (ver [`corridas/corrida-1-mision.json`](corridas/corrida-1-mision.json),
+  costo real US$ 0,0199 con `claude-haiku-4-5`).
 
 ## Qué falta o qué falló
 
 *(Se actualiza a medida que se completan los puntos pendientes de `DECISIONES.md`.)*
 
-- Todavía no se corrieron las 3 corridas reales exigidas por la consigna, ni se probó el modo
-  Foto con un caso real (el pendiente que dejó abierto la Entrega 1).
-- Todavía no se decidió el modelo con evidencia real (Haiku 4.5 vs. Sonnet 4.6) — el backend
-  usa Haiku 4.5 por defecto, a confirmar o corregir tras la primera corrida real.
-- Todavía no está desplegado en Vercel ni verificado con la clave real de Anthropic.
+- Ya corrió la primera de las 3 corridas reales exigidas (Misión, modo Link) — faltan 2 más,
+  al menos una con el modo Foto (el pendiente que dejó abierto la Entrega 1, todavía sin
+  validar).
+- El modelo por defecto (`claude-haiku-4-5`) resultó preciso en la corrida 1 (no inventó
+  platos ni precios) — a confirmar con las 2 corridas que faltan antes de dar la elección por
+  cerrada.
+- Encontrados y corregidos dos bugs reales durante la primera prueba en producción: `web_fetch`
+  necesitaba `allowed_callers: ["direct"]` con Haiku 4.5, y el alfabeto Unicode del título en
+  negrita no soporta vocales acentuadas ni Ñ (ver capítulos 7 y 8 de `DECISIONES.md`).
 - Faltan las secciones de análisis económico (proyección semanal/anual) y de gobierno y riesgo.
 
 ## Qué aprendí
