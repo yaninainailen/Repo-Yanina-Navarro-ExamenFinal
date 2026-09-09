@@ -230,23 +230,61 @@ Esta corrida de Il Giardino no se guarda en `corridas/` tal cual (tiene los dos 
 fixes ya desplegados, se va a repetir con las mismas fotos para guardar la versión corregida
 como evidencia de la corrida 2.
 
+## Capítulo 13 — el precio seguía inventado: el schema obligaba a inventarlo (2026-09-09)
+
+Con el fix del capítulo 12 desplegado, se repitió Il Giardino. El encabezado sí varió ("Nosotros
+probamos:" en vez de "Para comer fuimos con:" — ese fix funcionó), pero el precio de "Cocktails
+de autor" se siguió inventando: esta vez "desde $10.000" en vez de "$17.600". Ya no era el
+número copiado del ejemplo de LUZMALA (ese fix también funcionó, cortó esa vía puntual), pero
+el modelo igual inventó un número distinto, "razonable", para la misma categoría sin precio
+real. Pedido explícito de la usuaria para simplificar la regla: si no se encuentra el precio
+(ni en el link ni en la foto), no inventarlo — mencionar el plato/trago igual, pero sin precio.
+
+La causa real no era de redacción del contrato sino de **arquitectura del schema**: en
+`itemSchema` (`api/generar-copy.js`), el campo `precio` era un `string` obligatorio para
+cualquier ítem. El contrato decía en prosa "no inventes el precio", pero el JSON Schema —que es
+lo que Claude realmente tiene que cumplir estructuralmente— no dejaba otra opción que escribir
+algo en ese campo si quería incluir el ítem. Dicho de otra forma: la regla vivía en el texto del
+prompt, pero la obligación real vivía en la estructura de datos, y la estructura le ganó a la
+regla. Ningún texto de instrucción, por más específico, iba a resolver esto mientras el schema
+siguiera exigiendo un string no vacío.
+
+Fix real, en la estructura: `precio` pasa a ser nullable (`anyOf: [string, null]`) en
+`itemSchema`, tanto para `items_comida` como `items_bebida` y `postre`. El contrato se actualiza
+para reflejar la prioridad correcta al armar el bloque de bebida: (1) precio exacto del ítem si
+está, (2) "desde $X" con el precio real más bajo de la categoría si hay otros ítems con precio,
+(3) si no hay ningún precio real disponible, mencionar el ítem igual con `precio: null`. El
+backend (`renderizarCopy` → `lineaDeItem`) arma la línea con paréntesis de precio solo si
+`precio` no es `null`; si es `null`, el ítem aparece sin precio, en vez de desaparecer del copy
+o llevar un número inventado.
+
+De paso se aprovechó para reforzar el formato de precio en el contrato (separador de miles con
+punto, ej. "$18.500"), porque en esta misma corrida aparecieron precios sin el punto ("$18000")
+— inconsistencia menor de estilo, no de exactitud, pero vale la pena que quede escrita la regla
+en vez de depender de que el modelo copie el estilo de los ejemplos por su cuenta cada vez.
+
+**Aprendizaje para la sección de gobierno y riesgo**: cuando una regla de "no inventes X" no se
+sostiene después de reforzarla en el prompt dos veces (capítulos 12 y 13), el problema
+probablemente no es de redacción sino de que la estructura de datos no deja otra salida —
+conviene mirar el schema antes de seguir puliendo el texto de las instrucciones.
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
       caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
-      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Tres corridas
-      seguidas salieron con platos/precios correctos con Haiku 4.5 — evidencia a favor de
-      quedarse con el modelo chico; los dos bugs del capítulo 12 fueron de diseño del prompt,
-      no de precisión de lectura del modelo.)*
-- [ ] Repetir Il Giardino con los fixes del capítulo 12 y guardar como corrida 2 en `corridas/`.
+      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Los platos y
+      precios reales siempre salieron correctos con Haiku 4.5 — los bugs de los capítulos 12 y
+      13 fueron de diseño del contrato/schema, no de precisión de lectura del modelo.)*
+- [ ] Repetir Il Giardino con el fix del capítulo 13 y guardar como corrida 2 en `corridas/`.
       Correr 1 corrida más en un lugar nuevo (modo Link o Texto) para llegar a las 3 exigidas.
 - [ ] Análisis económico: costo real por corrida (hasta ahora ~US$ 0,016-0,020 por corrida con
       Haiku 4.5), proyección semanal/anual según el ritmo real de @barescopados (1-2
       posteos/semana).
 - [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
-      publicar, quién firma, y los casos de los capítulos 9 y 12 (fuente en conflicto,
-      contaminación de few-shot).
+      publicar, quién firma, y los casos de los capítulos 9, 12 y 13 (fuente en conflicto,
+      contaminación de few-shot, schema que forzaba a inventar precios).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
 - [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.
 - [x] Modo Foto: fix del 413 (compresión de imágenes antes de mandarlas) — capítulo 11.
 - [x] Modo Foto: validado con caso real (Il Giardino, 5 fotos) — capítulo 12.
+- [x] Precio inventado cuando no hay dato real: `precio` nullable en el schema — capítulo 13.

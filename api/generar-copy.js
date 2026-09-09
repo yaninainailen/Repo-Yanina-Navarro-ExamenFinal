@@ -27,7 +27,11 @@ const itemSchema = {
   properties: {
     emoji: { type: "string" },
     item: { type: "string" },
-    precio: { type: "string" },
+    // precio es nullable a propósito: si el menú/link/foto no tiene un precio real para este
+    // ítem, el modelo tiene que poder mencionar igual lo que se comió/tomó SIN inventar un
+    // número. Antes "precio" era un string obligatorio, así que la única forma de incluir el
+    // ítem era inventándole un precio — ver DECISIONES.md capítulo 13.
+    precio: { anyOf: [{ type: "string" }, { type: "null" }] },
   },
   required: ["emoji", "item", "precio"],
   additionalProperties: false,
@@ -174,6 +178,12 @@ function aNegritaSansMayuscula(texto) {
     .join("");
 }
 
+// Arma la línea de un ítem: con precio entre paréntesis si hay uno real, sin paréntesis si
+// precio vino en null (el ítem se menciona igual, pero sin un número inventado).
+function lineaDeItem(i) {
+  return i.precio ? `${i.emoji} ${i.item} (${i.precio})` : `${i.emoji} ${i.item}`;
+}
+
 function renderizarCopy(d) {
   const bloques = [];
 
@@ -181,7 +191,7 @@ function renderizarCopy(d) {
   bloques.push(d.apertura);
 
   if (d.items_comida && d.items_comida.length) {
-    const lineas = d.items_comida.map((i) => `${i.emoji} ${i.item} (${i.precio})`);
+    const lineas = d.items_comida.map(lineaDeItem);
     // Fallback defensivo: si el modelo no mandó encabezado_comida (no debería pasar, es
     // required en el schema), no se rompe el render — se usa el texto original por defecto.
     const encabezado = d.encabezado_comida || "Para comer fuimos con:";
@@ -189,12 +199,12 @@ function renderizarCopy(d) {
   }
 
   if (d.items_bebida && d.items_bebida.length) {
-    const lineas = d.items_bebida.map((i) => `${i.emoji} ${i.item} (${i.precio})`);
+    const lineas = d.items_bebida.map(lineaDeItem);
     bloques.push(`Para tomar:\n${lineas.join("\n")}`);
   }
 
   if (d.postre) {
-    bloques.push(`Y de postre…\n${d.postre.emoji} ${d.postre.item} (${d.postre.precio})`);
+    bloques.push(`Y de postre…\n${lineaDeItem(d.postre)}`);
   }
 
   if (d.datos && d.datos.length) {

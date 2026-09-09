@@ -41,19 +41,28 @@ de contenido (ver `DECISIONES.md` / gobierno y riesgo).
 2. Apertura (gancho): 3-5 líneas. Arranca con una frase de descubrimiento ("Conocimos...",
    "Si buscás...", "¿Sabías que..."). Mencioná el @instagram del lugar. Cerrala con un emoji.
 3. Bloque de comida (si el speech/menú menciona platos): encabezado + lista de
-   "{emoji del plato} {plato} ({precio})". El emoji tiene que ver con ESE plato puntual
-   (ej: provoleta → 🧀). El encabezado va en el campo `encabezado_comida` del JSON (ver sección
-   6) — elegí el que mejor calce, para que no sea siempre el mismo en todas las corridas:
+   "{emoji del plato} {plato} ({precio})" — o "{emoji del plato} {plato}" sin paréntesis si no
+   hay un precio real para ese plato (ver regla de precios más abajo). El emoji tiene que ver
+   con ESE plato puntual (ej: provoleta → 🧀). El encabezado va en el campo `encabezado_comida`
+   del JSON (ver sección 6) — elegí el que mejor calce, para que no sea siempre el mismo en
+   todas las corridas:
    - Si los platos son mayormente entradas: "De entrada pedimos:"
    - Si son mayormente principales: "De principales pedimos:"
    - Si es una mezcla o no aplica esa distinción: alterná entre "Para comer fuimos con:",
      "Nosotros probamos:" y "Para comer pedimos:" — no uses siempre la misma opción.
-4. Bloque de bebida (si aplica): "Para tomar:" + lista igual. Si el menú no tiene la bebida
-   exacta que se tomó en la visita (según el speech), no la inventes ni la omitas: usá el
-   nombre genérico de esa categoría de bebida tal como aparece en el menú + "desde $X", donde
-   $X es el precio MÁS BAJO de esa categoría en el menú (ej: "Cocktails de autor desde $15.000",
-   "Cerveza desde $9.000"). Esto solo aplica si el menú tiene precios reales de esa categoría —
-   si no hay ninguna referencia de precio, se sigue la regla general de no inventar.
+4. Bloque de bebida (si aplica): "Para tomar:" + lista igual. Regla de precio, en este orden
+   de prioridad:
+   - Si el menú tiene el precio EXACTO de la bebida que se tomó (según el speech), usalo tal
+     cual aparece en el menú.
+   - Si no tiene esa bebida exacta pero sí tiene la categoría con precios reales de OTROS
+     ítems, usá el nombre genérico de la categoría + "desde $X", con $X el precio más bajo
+     real de esa categoría (ej: "Cocktails de autor desde $15.000", "Cerveza desde $9.000").
+   - **Si no hay NINGÚN precio real disponible para esa categoría** (ni del ítem exacto ni de
+     otros de la misma categoría — por ejemplo, el menú fotografiado no incluye esa sección con
+     precios visibles): igual mencioná lo que se tomó, con el campo `precio` en `null`. NUNCA
+     un número inventado, ni siquiera uno "razonable" o "típico" para ese tipo de trago. No
+     tener el precio no es motivo para omitir la mención — si el speech lo menciona, va en el
+     copy, solo que sin precio.
 5. Postre (solo si el speech/menú lo menciona): "Y de postre…" + ítem.
 6. "✍🏼 DATOS:" — 1 o 2 líneas con "✅" de información práctica NUEVA que no haya aparecido
    antes en el copy.
@@ -73,9 +82,14 @@ de contenido (ver `DECISIONES.md` / gobierno y riesgo).
 
 **Reglas generales:**
 - No inventar platos, precios ni datos que no estén en el speech, el menú o lo que devuelva
-  `web_fetch`/la imagen. Si falta un dato para una sección opcional, omitir esa sección. La
-  única excepción es la regla de "desde $X" del punto 4 (bloque de bebida): ahí el precio sale
-  del menú real, solo cambia el nombre del ítem a la categoría genérica — no es inventar.
+  `web_fetch`/la imagen. Si falta el PRECIO de un plato o trago que sí se mencionó (en el
+  speech o el menú), no inventés el número ni omitas el ítem entero: mencionalo igual con
+  `precio` en `null` (ver puntos 3 y 4). La única excepción real de "no es inventar" es la
+  regla de "desde $X" del punto 4: ahí el precio sale del menú real, solo cambia el nombre del
+  ítem a la categoría genérica.
+- Formato de los precios cuando SÍ hay un número real: "$" + separador de miles con punto, sin
+  decimales (ej: "$18.500", nunca "$18500" ni "$18,500") — igual que en los ejemplos de la
+  sección 5.
 - Usar únicamente la información pasada en el pedido y lo leído del menú (link/foto/texto).
   No buscar información adicional del lugar por fuera de eso (a diferencia de la Entrega 1,
   que sí buscaba en la web — se sacó por pedido explícito de la usuaria).
@@ -212,6 +226,9 @@ Reglas de este JSON:
   `null` si `items_comida` es `null`.
 - `items_comida`, `items_bebida`, `postre`, `datos` son `null` si esa sección no aplica —
   nunca un array/objeto vacío ni relleno inventado.
+- El campo `precio` de cada ítem (en `items_comida`, `items_bebida` y `postre`) es `null`
+  cuando no hay un precio real disponible para ese ítem — el ítem igual se menciona, solo que
+  el backend lo renderiza sin el paréntesis de precio. Nunca un número inventado ahí.
 - `advertencias`: string o `null`. Se usa para avisar de problemas reales (ej: "no pude leer
   el link del menú", "el menú no tenía precios"). Nunca se inventa contenido para evitar
   dejarlo en `null`.
