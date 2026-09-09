@@ -11,8 +11,9 @@ Estructura del repo:
   [`user_prompt.md`](prompts/user_prompt.md) (plantilla del pedido).
 - `api/generar-copy.js` — backend serverless (Vercel), el único lugar con la API key.
 - `corridas/` — evidencia de las corridas reales.
-- `DECISIONES.md` — la historia completa del proceso, incluida la Entrega 1 y el feedback
-  del profesor en clase que motivó este rediseño.
+- `DECISIONES.md` — la historia completa del proceso (17 capítulos, incluida la Entrega 1 y el
+  feedback del profesor en clase que motivó este rediseño), más las secciones de **Análisis
+  económico** y **Gobierno y riesgo** que pide la consigna del trabajo final.
 
 ## Qué construí
 
@@ -79,30 +80,66 @@ Instrucciones principales, en orden, dadas a Claude Code:
   mostró además al sistema usando el campo `advertencias` correctamente: cuando la dirección
   cargada a mano no coincidía con la del menú online, avisó la discrepancia en vez de mezclar
   los datos o inventar cuál era la correcta.
+- **Elección de modelo confirmada con evidencia**: `claude-haiku-4-5` no cometió ningún error de
+  precisión en las 3 corridas reales — se queda como modelo por defecto (ver `DECISIONES.md`,
+  capítulo 17). Con Sonnet 4.6 el costo se triplicaría sin ninguna mejora observada que lo
+  justifique.
+- **Análisis económico y Gobierno y riesgo** completos en `DECISIONES.md`: costo real ≈ US$ 0,019
+  por corrida en uso normal, proyección de ≈ US$ 1-2 al año al ritmo real de la cuenta; niveles
+  de supervisión L0-L4 definidos, con el sistema ubicado en L2 (agente con herramientas, pero
+  ninguna salida se publica sin lectura humana previa).
 
 ## Qué falta o qué falló
 
-*(Se actualiza a medida que se completan los puntos pendientes de `DECISIONES.md`.)*
+*(Los 6 requisitos de la consigna están cubiertos. Esto es lo que falló en el camino y cómo se
+resolvió — el detalle completo, capítulo por capítulo, está en `DECISIONES.md`.)*
 
-- Las 3 corridas reales exigidas ya están corridas y guardadas en `corridas/`. El modelo por
-  defecto (`claude-haiku-4-5`) resultó preciso leyendo platos y precios reales en las 3 (tanto
-  de links como de fotos) — ningún error de precisión de lectura, todos los bugs encontrados
-  fueron de diseño del contrato o del schema (ver abajo).
-- Encontrados y corregidos varios bugs reales durante las pruebas en producción — el detalle
-  completo de cada uno está en `DECISIONES.md` (capítulos 7 a 16): `web_fetch` necesitaba
-  `allowed_callers: ["direct"]` con Haiku 4.5; el alfabeto Unicode del título en negrita no
-  soporta vocales acentuadas ni Ñ; el modo Foto solo aceptaba una imagen (los menús reales
-  tienen varias hojas); Vercel corta cualquier request a 4.5 MB (fotos de celular sin comprimir
-  la superaban); un precio inventado que resultó ser una **contaminación del few-shot** (copiado
-  textual de uno de los ejemplos del contrato) y que, incluso después de prohibirlo
-  explícitamente, se seguía inventando porque el JSON Schema exigía un precio como string
-  obligatorio — la regla vivía en el prompt pero la obligación real vivía en la estructura de
-  datos, y hubo que arreglar el schema, no solo el texto; y un horario inventado en la sección
-  de datos operativos (agregó un día que no estaba en la fuente real).
-- Faltan las secciones de análisis económico (proyección semanal/anual) y de gobierno y riesgo,
-  y confirmar la elección de modelo por escrito con la evidencia ya reunida.
+- Encontrados y corregidos varios bugs reales durante las pruebas en producción: `web_fetch`
+  necesitaba `allowed_callers: ["direct"]` con Haiku 4.5; el alfabeto Unicode del título en
+  negrita no soporta vocales acentuadas ni Ñ; el modo Foto solo aceptaba una imagen (los menús
+  reales tienen varias hojas); Vercel corta cualquier request a 4.5 MB (fotos de celular sin
+  comprimir la superaban); un precio inventado que resultó ser una **contaminación del
+  few-shot** (copiado textual de uno de los ejemplos del contrato) y que, incluso después de
+  prohibirlo explícitamente, se seguía inventando porque el JSON Schema exigía un precio como
+  string obligatorio — la regla vivía en el prompt pero la obligación real vivía en la
+  estructura de datos; y un horario inventado en la sección de datos operativos (agregó un día
+  que no estaba en la fuente real).
+- No se llegó a correr una corrida guardada en modo Texto (las 3 exigidas cubrieron Link y Foto)
+  — el modo existe y funciona (usado también como fallback interno), pero no tiene evidencia
+  propia en `corridas/`.
+- La falla de `web_fetch` sin precios utilizables (contemplada en el contrato, cae en
+  `advertencias`) nunca se dio en una corrida real — es un camino del código probado por
+  inspección, no por un caso real todavía.
 
 ## Qué aprendí
 
-*(Se completa al cierre, con las 5 líneas honestas que pide el formato — después de correr las
-corridas reales y ver qué de todo esto sostiene y qué no.)*
+- **Aprendí el stack, no solo el prompt.** Entrar a Vercel, entender qué es una función
+  serverless y una variable de entorno, bajar los Logs del proyecto para leer un error real
+  (el 400 de `web_fetch`, el 413 del tamaño de las fotos) y volver con eso a corregir el código
+  — y entender cómo se conectan las tres piezas: escribo/reviso en Claude Code, eso se sube a
+  GitHub con un commit, y Vercel redespliega solo apenas detecta el push. En la Entrega 1 el
+  "backend" era el propio navegador; acá tuve que entender un pipeline real, aunque no escriba
+  el código a mano.
+- **La regla no vive donde uno piensa que vive.** Escribí "no inventes el precio" en el contrato
+  tres veces, con cada vez más detalle, y el modelo lo siguió inventando — hasta que miré el
+  JSON Schema y vi que `precio` era un string obligatorio. La regla estaba en el prompt, pero la
+  obligación real estaba en la estructura de datos. La lección se repite en la materia (output
+  estructurado) pero hace falta vivirla para que quede: cuando una instrucción no se sostiene,
+  el problema muchas veces no es de redacción.
+- **Nombrar el error real gana contra la regla genérica.** "No inventes" no alcanzó. "No uses
+  $17.600 de cocktails de autor solo porque el ejemplo de LUZMALA también tiene cocktails de
+  autor a ese precio" sí. Poner el caso concreto como ejemplo negativo funcionó mejor que
+  cualquier formulación abstracta, en los tres bugs de invención que aparecieron.
+- **Los few-shot examples son una superficie de riesgo, no solo una ayuda de estilo.** Puse tres
+  ejemplos reales de la cuenta para que el modelo imitara el tono — y terminó copiando un precio
+  textual de uno de ellos. Un ejemplo de estilo puede filtrarse como dato si no se lo blindea
+  explícitamente.
+- **El modo Foto no estaba tan resuelto como parecía en la Entrega 1.** Ahí quedó "implementado
+  pero sin validar" — acá, al validarlo de verdad, aparecieron dos problemas que ni siquiera
+  había contemplado (una sola foto no alcanza para un menú real de varias hojas, y el límite de
+  4.5 MB de Vercel). Un "funciona" sin una corrida real detrás no significa nada.
+- **El costo de la API dejó de ser el problema.** En la Entrega 1, la razón para usar Gemini
+  gratis en vez de Claude era el costo. Con las 3 corridas reales, el costo terminó siendo
+  irrelevante (~US$ 1-2 al año) — el verdadero trabajo estuvo en el contrato, el schema y los
+  bugs de producción, no en el presupuesto. La restricción que más importaba al principio no era
+  la que más importó al final.

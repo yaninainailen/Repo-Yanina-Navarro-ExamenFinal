@@ -355,21 +355,154 @@ casos reales cada uno contando las pruebas fallidas documentadas en los capítul
 no se llegó a probar con una corrida guardada, pero es el modo más simple —sin herramienta
 externa— y no tuvo ningún bug propio en el desarrollo).
 
+## Capítulo 17 — elección de modelo, con evidencia real (2026-09-09)
+
+Criterio de la materia (Diccionario, Clase 2): *"el modelo más chico que hace bien la tarea"*.
+Con las 3 corridas reales completas, hay evidencia concreta para decidir sin extrapolar en el
+vacío:
+
+- **Precisión de lectura**: en las 3 corridas (un link con menú scrapeado por `web_fetch`, 5
+  fotos reales de un menú de varias hojas, y otro link con un menú online completo),
+  `claude-haiku-4-5` no cometió **ningún** error de precisión — todos los platos y precios que
+  devolvió coinciden exactamente con la fuente real (verificado línea por línea contra el texto
+  scrapeado y contra el copy de referencia que la usuaria había escrito a mano para Il Giardino).
+- **Todos los bugs encontrados durante el desarrollo fueron de diseño** (contrato ambiguo,
+  schema que forzaba a inventar, few-shot contaminando la salida) — **ninguno** fue una falla de
+  comprensión atribuible al tamaño del modelo. No hay ninguna señal en las 3 corridas de que un
+  modelo más grande hubiera evitado alguno de estos bugs; los fixes fueron todos de prompt/schema,
+  no de modelo.
+- **Costo**: ver Análisis económico más abajo — con Sonnet 4.6 el costo se triplica (mismo
+  volumen de tokens, precio 3x tanto en input como en output) sin ninguna mejora de calidad
+  observada que lo justifique.
+
+**Decisión: `claude-haiku-4-5` se queda como modelo por defecto.** `MODEL_ID` sigue siendo una
+variable de entorno (no hardcodeada) para poder subir a Sonnet sin tocar código el día que
+aparezca un caso real que Haiku no resuelva bien (ej. un menú manuscrito ilegible, una foto muy
+mala calidad, un menú en un idioma distinto) — la decisión es reversible y barata de revertir,
+no una apuesta cerrada.
+
+## Análisis económico
+
+**Costo real por corrida**, con `claude-haiku-4-5` (las 3 corridas guardadas en `corridas/`):
+
+| Corrida | Modo | Tokens in / out | Cache | Costo real |
+|---|---|---|---|---|
+| 1 — Misión | Link | 788 / 545 | frío (creó cache) | US$ 0,0199 |
+| 2 — Il Giardino | Foto (5 imgs) | 8.189 / 427 | tibio (pegó cache de otra corrida reciente) | US$ 0,0109 |
+| 3 — Victoria Brown | Link | 648 / 612 | frío (creó cache) | US$ 0,0186 |
+
+El contrato (`prompts/system_prompt.md`) es largo (rol, contexto, restricciones detalladas, 3
+ejemplos completos) y va cacheado (`cache_control: ephemeral`, ventana de 5 minutos). Cuando dos
+corridas caen dentro de esa ventana, la segunda paga solo el 10% del precio de input por los
+tokens que reutiliza del cache — por eso la corrida 2 salió más barata: se hizo poco después de
+otra prueba. En **uso real**, los posteos de @barescopados están espaciados en días, no en
+minutos, así que el cache casi siempre va a estar frío. La proyección usa por eso el promedio de
+las corridas 1 y 3 (las dos que partieron de cache frío), no el mínimo observado:
+
+**Costo esperado en uso real: ≈ US$ 0,019 por corrida.**
+
+**Proyección**, según el ritmo real de la cuenta (1-2 posteos/semana, un uso, en general, sin
+necesidad de repetir la corrida si el sistema no tiene bugs activos):
+
+| Ritmo | Por semana | Por año (52 semanas) |
+|---|---|---|
+| 1 posteo/semana | US$ 0,019 | **≈ US$ 1** |
+| 2 posteos/semana | US$ 0,038 | **≈ US$ 2** |
+
+Incluso agregando un 30% de margen por corridas que haya que repetir (un dato ambiguo, una
+prueba de un lugar que finalmente no se publica), el techo realista es de **unos pocos dólares
+al año**. A esta escala, el costo de la API de Claude no es un factor de decisión — ni siquiera
+se acerca a lo que cuesta una sola suscripción de cualquier herramienta de diseño o edición. El
+verdadero ahorro del sistema no está en los tokens: está en el tiempo humano que reemplaza
+(grabar, mirar el menú y escribir el copy a mano en el estilo de la cuenta), que no se mide en
+dólares de infraestructura pero es el motivo real por el que este proyecto tiene sentido.
+
+**Comparación con `claude-sonnet-4-6`** (no se corrió una corrida real con este modelo — la
+proyección sale de la tabla de precios oficial, que es pública y no requiere una corrida para
+calcularse): Sonnet cuesta 3x tanto en input (US$ 3 vs. US$ 1 por millón de tokens) como en
+output (US$ 15 vs. US$ 5) respecto a Haiku. Con el mismo volumen de tokens que las 3 corridas
+reales, el costo esperado por corrida pasaría de ≈ US$ 0,019 a ≈ US$ 0,057, y la proyección
+anual de ≈ US$ 1-2 a ≈ US$ 3-6. Sigue siendo un monto trivial en términos absolutos, pero
+pagarlo sin evidencia de que Haiku falla en algo no tiene sentido — ver capítulo 17.
+
+## Gobierno y riesgo
+
+**Niveles de supervisión (L0-L4).** El vocabulario del curso no deja una escala L0-L4 escrita en
+el material disponible; se define acá de forma explícita, en los términos que pide la consigna
+("qué hace solo, qué revisa una persona, quién firma"), y se ubica el sistema dentro de ella:
+
+| Nivel | Qué hace el agente solo | Qué revisa una persona |
+|---|---|---|
+| L0 — Manual | Nada — todo lo hace una persona | Todo (esto era @barescopados antes de este proyecto) |
+| L1 — Asistido | Redacta a partir de datos que la persona ya recopiló a mano | Lee y edita el resultado antes de usarlo |
+| **L2 — Con herramientas, revisión previa (⬅ acá está este sistema)** | Busca/lee datos por su cuenta (`web_fetch`, visión) y arma el copy completo | Lee el copy entero, chequea `advertencias`, decide publicar o no — **ninguna salida llega a Instagram sin este paso** |
+| L3 — Revisión por excepción | Publicaría directo salvo que dispare una señal de alerta | Solo interviene cuando el sistema avisa un conflicto |
+| L4 — Autónomo | Decide y publica sin intervención en el camino crítico | Audita muestras después del hecho |
+
+El sistema está en **L2** a propósito: no hay ninguna integración que publique en Instagram
+directamente — el copy se genera, se lee, se copia manualmente. La firma humana ocurre *afuera*
+del sistema, en el momento de apretar publicar en la app de Instagram, no en ningún paso del
+código.
+
+**Qué sistemas toca el agente, con qué permisos:**
+- **API de Anthropic**: la clave (`ANTHROPIC_API_KEY`) vive solo como variable de entorno en
+  Vercel (Production/Preview) — nunca en el repo ni en el navegador (el fix directo al feedback
+  del profesor sobre la Entrega 1). No tiene fecha de vencimiento (decisión documentada en el
+  capítulo 6): el riesgo que se acepta es que, si se filtrara, seguiría siendo válida
+  indefinidamente; se mitiga porque el único lugar donde existe es esa variable de entorno.
+- **`web_fetch`**: puede leer cualquier URL pública que la usuaria pegue en el campo del menú —
+  no hay una lista blanca de dominios. El riesgo (que el link no sea el menú real, o apunte a
+  contenido inapropiado) está acotado porque quien carga el link es la propia usuaria, no un
+  tercero no confiable.
+- **Fotos del menú**: se procesan en memoria (base64 dentro del request a la función serverless)
+  y no quedan guardadas en ningún storage del servidor — Vercel no persiste el body más allá de
+  la ejecución. Si se guarda una corrida, las fotos se excluyen a propósito del JSON descargado
+  (nota en el campo, no la imagen — ver `script.js`).
+- **No hay ninguna escritura a sistemas externos**: el agente no publica en Instagram, no manda
+  mensajes, no modifica nada fuera de su propia respuesta. La única "escritura" es el archivo
+  JSON que la usuaria descarga a mano con el botón "Guardar corrida", que queda local hasta que
+  ella decide subirlo al repo.
+
+**Qué puede salir mal — con evidencia real, no hipotética (todo esto pasó durante el desarrollo,
+documentado capítulo por capítulo):**
+1. El modelo prioriza en silencio una fuente sobre otra cuando entran en conflicto (capítulo 9:
+   el speech decía "higos", el menú real decía "mango" — usó el menú, la decisión correcta, pero
+   sin señalar que hubo un conflicto).
+2. Contaminación de few-shot: copia un dato de los ejemplos de estilo del contrato en vez de usar
+   el dato real de la corrida (capítulo 12) — clase de error que puede volver a aparecer si se
+   agregan más ejemplos al contrato sin cuidado.
+3. Un campo obligatorio en el schema puede forzar al modelo a inventar un valor si no hay dato
+   real disponible (capítulo 13) — lección operativa: cuando una regla de "no inventes" no se
+   sostiene, revisar el schema antes de seguir puliendo el texto del prompt.
+4. Resumir mal un dato real al comprimirlo (capítulo 15: un horario con tres franjas distintas
+   terminó con un día agregado que no estaba en la fuente).
+5. Fuentes en conflicto explícitas, manejadas bien: dirección cargada a mano vs. dirección del
+   menú online (capítulo 16) — el sistema no arbitra cuál es la verdad, deja constancia en
+   `advertencias` y una persona lo resuelve.
+6. Fallas de herramienta: si `web_fetch` falla o no trae precios utilizables, el contrato exige
+   decirlo en `advertencias` en vez de inventar o callarlo (todavía no se dio este caso en una
+   corrida real, pero está contemplado y no probado en producción — riesgo residual conocido).
+
+**Qué reviso yo (Yanina) antes de confiar en una salida** — el punto de supervisión L2 real, no
+un trámite:
+- Que los platos y precios coincidan con la visita real, no solo con lo que dice el menú *hoy*
+  (el menú puede haber cambiado desde la visita — el sistema lee la fuente actual, no puede saber
+  qué pasó ese día puntual).
+- Que el campo `advertencias` esté vacío; si no lo está, resolver la discrepancia a mano antes de
+  publicar (no ignorarla).
+- Que el tono sea coherente con la cuenta — esto lo evalúa solo una persona, no está en el
+  contrato ni puede estarlo del todo.
+- Que ningún ítem quedó con `precio: null` que en realidad sí se conoce de memoria (el sistema es
+  deliberadamente conservador: prefiere omitir un precio a inventarlo, lo que a veces significa
+  completar algo a mano que el sistema no pudo verificar solo).
+
+**Quién firma:** Yanina o Lucho — quien efectivamente publica en la cuenta de Instagram de
+@barescopados. No hay una firma dentro del sistema porque no hay ninguna acción del sistema que
+requiera firma: el acto de publicar ocurre completamente afuera del código, en Instagram, después
+de la revisión humana descrita arriba.
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
-- [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un
-      caso real con precios; si falla en precisión (como pasó con el Gemini lite en la
-      Entrega 1), subir a `claude-sonnet-4-6`. Documentar el resultado acá. *(Los platos y
-      precios reales siempre salieron correctos con Haiku 4.5 en las 3 corridas guardadas —
-      todos los bugs encontrados fueron de diseño del contrato/schema, no de precisión de
-      lectura del modelo — evidencia sólida a favor de quedarse con el modelo chico.)*
-- [ ] Análisis económico: costo real por corrida (rango observado US$ 0,011-0,020 con Haiku
-      4.5, según si pega en cache), proyección semanal/anual según el ritmo real de
-      @barescopados (1-2 posteos/semana).
-- [ ] Sección de gobierno y riesgo: niveles de supervisión, qué revisa una persona antes de
-      publicar, quién firma, y los casos reales de los capítulos 9, 12, 13, 15 y 16 (fuente en
-      conflicto resuelta con `advertencias`, contaminación de few-shot, schema que forzaba a
-      inventar precios, datos operativos completados con suposiciones plausibles).
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
 - [x] Modo Foto: soporte para varias imágenes (hasta 5, JPEG) — capítulo 10.
 - [x] Modo Foto: fix del 413 (compresión de imágenes antes de mandarlas) — capítulo 11.
@@ -379,6 +512,7 @@ externa— y no tuvo ningún bug propio en el desarrollo).
 - [x] Horario/dato operativo inventado en DATOS: regla explícita agregada — capítulo 15.
 - [x] Corrida 3 guardada (`corridas/corrida-3-victoria-brown.json`) — capítulo 16.
 - [x] **Las 3 corridas reales exigidas están completas.**
-- [x] Precio inventado cuando no hay dato real: `precio` nullable en el schema — capítulo 13.
-- [x] Corrida 2 guardada (`corridas/corrida-2-il-giardino.json`) — capítulo 14.
-- [x] Horario/dato operativo inventado en DATOS: regla explícita agregada — capítulo 15.
+- [x] Elección de modelo justificada con evidencia real — capítulo 17.
+- [x] Análisis económico: costo por corrida, proyección semanal/anual, comparación con Sonnet.
+- [x] Gobierno y riesgo: niveles L0-L4, permisos, fallas reales, supervisión, quién firma.
+- [ ] Completar "Qué aprendí" en el README (última pieza antes de la entrega).
