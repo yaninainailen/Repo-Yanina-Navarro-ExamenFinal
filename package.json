@@ -1,0 +1,9 @@
+{
+  "name": "barescopados-copy-generator",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Generador de copies de Instagram para @barescopados — trabajo final, materia Creacion de Agentes de IA (MBA UCEMA)",
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  }
+}

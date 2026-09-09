@@ -15,22 +15,8 @@
 
 <main>
 
-  <section class="card" id="api-key-card">
-    <h2>1. Tu clave de Gemini</h2>
-    <p class="hint">
-      Se guarda solo en este navegador (nunca se sube al repositorio). Si no tenés una,
-      conseguila gratis en <a href="https://aistudio.google.com" target="_blank" rel="noopener">aistudio.google.com</a>.
-    </p>
-    <label for="apiKey">API Key</label>
-    <input type="password" id="apiKey" placeholder="Pegá tu clave acá" autocomplete="off">
-    <label class="checkbox-label">
-      <input type="checkbox" id="rememberKey" checked>
-      Recordar en este navegador
-    </label>
-  </section>
-
   <form id="copyForm" class="card">
-    <h2>2. Datos del lugar</h2>
+    <h2>1. Datos del lugar</h2>
 
     <label for="nombreBar">Nombre del bar</label>
     <input type="text" id="nombreBar" required placeholder="Ej: Casa Gin">
@@ -44,7 +30,7 @@
     <label for="speech">Speech del video (lo que grabaste en la voz en off)</label>
     <textarea id="speech" rows="6" required placeholder="Pegá acá el guion o transcripción de lo que contaste en el video: qué probaron, qué te pareció, alguna anécdota del lugar..."></textarea>
 
-    <h2>3. Menú y precios</h2>
+    <h2>2. Menú y precios</h2>
     <div class="tabs" role="tablist">
       <button type="button" class="tab-btn active" data-mode="link">Link</button>
       <button type="button" class="tab-btn" data-mode="foto">Foto</button>
@@ -67,7 +53,7 @@
       <textarea id="menuTexto" rows="5" placeholder="Ej: Provoleta $18.500&#10;Trucha con vegetales $31.000&#10;Clover Club $14.000"></textarea>
     </div>
 
-    <h2>4. Ideal para</h2>
+    <h2>3. Ideal para</h2>
     <div class="checkbox-group">
       <label class="checkbox-label"><input type="checkbox" name="idealPara" value="citas"> Citas</label>
       <label class="checkbox-label"><input type="checkbox" name="idealPara" value="amigos"> Amigos</label>
@@ -83,9 +69,11 @@
     <div id="loading" class="hidden">Escribiendo copy...</div>
     <textarea id="resultado" rows="18" readonly></textarea>
     <button type="button" id="copiarBtn" class="btn-secondary">📋 Copiar</button>
+    <button type="button" id="guardarCorridaBtn" class="btn-secondary">💾 Guardar esta corrida</button>
     <p id="copiadoMsg" class="hint hidden">¡Copiado!</p>
+    <p class="hint" id="metaCorrida"></p>
     <p class="hint hidden" id="fuentesToggleWrap">
-      <button type="button" id="fuentesToggle" class="link-btn">Ver qué buscó/leyó el agente</button>
+      <button type="button" id="fuentesToggle" class="link-btn">Ver qué leyó el agente</button>
     </p>
     <div class="hint hidden" id="fuentes"></div>
   </section>

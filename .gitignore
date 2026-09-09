@@ -3,3 +3,6 @@
 *.env
 .env.*
 *secret*
+
+# Dependencias (Vercel las instala solo con package.json)
+node_modules/
