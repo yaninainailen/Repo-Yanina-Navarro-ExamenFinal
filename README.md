@@ -65,7 +65,7 @@ Instrucciones principales, en orden, dadas a Claude Code:
   formato que exige `corridas/`, sin copiar/pegar a mano.
 - **Desplegado y verificado en Vercel** con la clave real de Anthropic: `web_fetch` lee de
   verdad el menú de un link externo (ver [`corridas/corrida-1-mision.json`](corridas/corrida-1-mision.json),
-  costo real US$ 0,0199 con `claude-haiku-4-5`).
+  costo real US$ 0,0218 con `claude-haiku-4-5`).
 - **Modo Foto validado con un caso real de menú de varias hojas**: hasta 5 fotos JPEG por
   corrida (comprimidas en el navegador antes de mandarlas, para no chocar con el límite de
   tamaño de Vercel), leídas con visión nativa de Claude (ver

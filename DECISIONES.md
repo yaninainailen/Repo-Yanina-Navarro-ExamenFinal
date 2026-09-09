@@ -124,6 +124,11 @@ menú), la llamada real a `web_fetch` (se ve en `fuentes` que efectivamente ley�
 devolvió el modelo, el copy ya renderizado, y el costo real: **US$ 0,0199** (788 tokens de
 entrada, 545 de salida, más creación/lectura de cache), con `claude-haiku-4-5`.
 
+*(Nota del 2026-09-09: este archivo se reemplazó después por una corrida nueva del mismo caso,
+para que tuviera el campo `encabezado_comida` agregado en el capítulo 12 — ver capítulo 18. Los
+números de costo y tokens de este párrafo corresponden a la versión original, ya no son los que
+están en `corridas/corrida-1-mision.json` hoy.)*
+
 Un detalle a favor de que el agente está priorizando bien la fuente correcta: en el speech se
 mencionó "provoleta con compota de **higos**", pero el menú real dice "compota de **mango**"
 — el agente usó el dato del menú (verificable) en vez de lo dicho en el speech (memoria,
@@ -387,9 +392,12 @@ no una apuesta cerrada.
 
 | Corrida | Modo | Tokens in / out | Cache | Costo real |
 |---|---|---|---|---|
-| 1 — Misión | Link | 788 / 545 | frío (creó cache) | US$ 0,0199 |
+| 1 — Misión | Link | 821 / 512 | frío (creó cache) | US$ 0,0218 |
 | 2 — Il Giardino | Foto (5 imgs) | 8.189 / 427 | tibio (pegó cache de otra corrida reciente) | US$ 0,0109 |
 | 3 — Victoria Brown | Link | 648 / 612 | frío (creó cache) | US$ 0,0186 |
+
+*(La corrida 1 se reemplazó el 2026-09-09 por un fix de formato — ver capítulo 18. Los números
+de esta tabla son los del archivo actual en `corridas/`.)*
 
 El contrato (`prompts/system_prompt.md`) es largo (rol, contexto, restricciones detalladas, 3
 ejemplos completos) y va cacheado (`cache_control: ephemeral`, ventana de 5 minutos). Cuando dos
@@ -399,15 +407,15 @@ otra prueba. En **uso real**, los posteos de @barescopados están espaciados en 
 minutos, así que el cache casi siempre va a estar frío. La proyección usa por eso el promedio de
 las corridas 1 y 3 (las dos que partieron de cache frío), no el mínimo observado:
 
-**Costo esperado en uso real: ≈ US$ 0,019 por corrida.**
+**Costo esperado en uso real: ≈ US$ 0,020 por corrida.**
 
 **Proyección**, según el ritmo real de la cuenta (1-2 posteos/semana, un uso, en general, sin
 necesidad de repetir la corrida si el sistema no tiene bugs activos):
 
 | Ritmo | Por semana | Por año (52 semanas) |
 |---|---|---|
-| 1 posteo/semana | US$ 0,019 | **≈ US$ 1** |
-| 2 posteos/semana | US$ 0,038 | **≈ US$ 2** |
+| 1 posteo/semana | US$ 0,020 | **≈ US$ 1** |
+| 2 posteos/semana | US$ 0,040 | **≈ US$ 2** |
 
 Incluso agregando un 30% de margen por corridas que haya que repetir (un dato ambiguo, una
 prueba de un lugar que finalmente no se publica), el techo realista es de **unos pocos dólares
@@ -421,7 +429,7 @@ dólares de infraestructura pero es el motivo real por el que este proyecto tien
 proyección sale de la tabla de precios oficial, que es pública y no requiere una corrida para
 calcularse): Sonnet cuesta 3x tanto en input (US$ 3 vs. US$ 1 por millón de tokens) como en
 output (US$ 15 vs. US$ 5) respecto a Haiku. Con el mismo volumen de tokens que las 3 corridas
-reales, el costo esperado por corrida pasaría de ≈ US$ 0,019 a ≈ US$ 0,057, y la proyección
+reales, el costo esperado por corrida pasaría de ≈ US$ 0,020 a ≈ US$ 0,060, y la proyección
 anual de ≈ US$ 1-2 a ≈ US$ 3-6. Sigue siendo un monto trivial en términos absolutos, pero
 pagarlo sin evidencia de que Haiku falla en algo no tiene sentido — ver capítulo 17.
 
@@ -501,6 +509,32 @@ un trámite:
 requiera firma: el acto de publicar ocurre completamente afuera del código, en Instagram, después
 de la revisión humana descrita arriba.
 
+## Capítulo 18 — corrida 1 desactualizada: hallazgo del propio agente evaluador (2026-09-09)
+
+Se construyó un agente evaluador propio (parcial de la materia) y se lo corrió sobre este mismo
+repo antes de la entrega final. Puntaje: 91/100. El único punto débil que encontró, en la
+dimensión "Sistema completo y funcionando" (21/30, "Bueno" en vez de "Excelente"): las 3 corridas
+guardadas no tenían el mismo schema. `corridas/corrida-1-mision.json` se había guardado en el
+capítulo 9, **antes** de que el capítulo 12 agregara el campo `encabezado_comida` al JSON — así
+que las corridas 2 y 3 lo tienen y la 1 no. Formato no idéntico entre las 3 corridas, tal como
+señaló el evaluador.
+
+Es un hallazgo válido y esperable: la corrida 1 es evidencia real de un momento real del
+desarrollo (antes del capítulo 12), no un error de tipeo. La sugerencia concreta del propio
+evaluador fue la correcta: volver a correr el mismo caso con el sistema actual y reemplazar el
+archivo. Se hizo así — no repitiendo el flujo por el navegador, sino llamando directamente al
+endpoint desplegado (`POST /api/generar-copy`) con la misma entrada exacta que se había guardado
+en la corrida original (mismo speech, mismo link de menú), para no introducir ninguna variable
+nueva. La respuesta trajo `"encabezado_comida": "Nosotros probamos:"` y el resto de los datos
+consistentes con las corridas anteriores del mismo lugar (mismos platos y precios reales del
+menú, ver capítulos 9 y 10). Se reemplazó `corridas/corrida-1-mision.json` por esta versión.
+
+El costo y los tokens de esta nueva corrida (US$ 0,021752; 821 tokens de entrada, 512 de salida,
+14.177 de creación de cache) son ligeramente distintos a los de la corrida original citados en el
+capítulo 9 (US$ 0,0199; 788/545) — normal, cada corrida es una inferencia nueva contra el menú
+real, que además pudo cambiar levemente desde entonces. El análisis económico más abajo usa los
+números actualizados.
+
 ## Pendiente al momento de escribir esto (2026-09-09)
 
 - [x] Deploy en Vercel y verificación end-to-end con la clave real de Anthropic.
@@ -515,4 +549,6 @@ de la revisión humana descrita arriba.
 - [x] Elección de modelo justificada con evidencia real — capítulo 17.
 - [x] Análisis económico: costo por corrida, proyección semanal/anual, comparación con Sonnet.
 - [x] Gobierno y riesgo: niveles L0-L4, permisos, fallas reales, supervisión, quién firma.
-- [ ] Completar "Qué aprendí" en el README (última pieza antes de la entrega).
+- [x] Completar "Qué aprendí" en el README.
+- [x] Corregir inconsistencia de formato en `corrida-1-mision.json` (hallazgo del agente
+      evaluador propio, 91/100 antes de este fix) — capítulo 18.

@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-09-09T00:54:52.736Z",
+  "fecha": "2026-09-09T23:17:01.000Z",
   "entrada": {
     "nombreBar": "Misión",
     "instagramLugar": "@mision.ba",
@@ -14,11 +14,12 @@
     "menuTexto": ""
   },
   "salida": {
-    "copy": "🕺𝗠𝗜𝗦𝗜Ó𝗡🕺\n\nConocimos @mision.ba, un bar con un ambiente increíble en Palermo donde la verdadera magia sucede... ¡en el baño! Porque sí, adentro hay un boliche completo con DJ, música y gente bailando en un lugar donde definitivamente no esperabas terminar la noche 🎶\n\nPara comer fuimos con:\n🧀 Provoleta Gratinada con compota de mango ($27.000)\n🫘 Mollejas Teriyaki con papines andinos y puré de coliflor ($29.000)\n🐟 Pesca fresca a la plancha con puré de brócoli ($41.000)\n🥩 Ojo de Bife con puré de batata y criolla ($47.000)\n\nPara tomar:\n🍸 Tragos de autor (desde $22.000)\n\n✍🏼 DATOS:\n✅ Abre para cenar y después sube la música para bailar en la noche.\n✅ El boliche funciona adentro del baño con DJ en vivo.\n\n☝🏼 Ideal para: citas, amigos\n\n📍 Godoy Cruz 1715, Palermo\n\n💬 ¿Con quién irías a Misión para terminar bailando en el baño?\n\n#BaresCopados #BolicheSorpresa #Palermo #Cocteleria #CenaYBaile",
+    "copy": "🚽𝗠𝗜𝗦𝗜𝗢𝗡🚽\n\nConocimos @mision.ba, un bar con un ambiente increíble, muy buena comida y tragos… pero lo más insólito pasa cuando vas al baño. Porque sí, ¡hay un boliche adentro! Con DJ, música y gente bailando en un lugar donde definitivamente no esperabas terminar la noche 🕺\n\nNosotros probamos:\n🧀 Provoleta Gratinada con compota de mango ($27.000)\n🍖 Mollejas Teriyaki con papines andinos y puré de coliflor ($29.000)\n🐟 Pesca fresca a la plancha con puré de brócoli ($41.000)\n🥩 Ojo de Bife con reducción de malbec, puré de batata y criolla ($47.000)\n\nPara tomar:\n🍹 Tragos de autor ($22.000)\n\n✍🏼 DATOS:\n✅ Después de la cena sube la música, aparece la DJ y podés terminar la noche bailando en el baño.\n\n☝🏼 Ideal para: citas, amigos\n\n📍 Godoy Cruz 1715, Palermo\n\n💬 ¿Con quién irías a terminar la noche en Misión?\n\n#BaresCopados #BarOculto #Coctelería #Citas #BuenosAires",
     "datosEstructurados": {
-      "emoji_tematico": "🕺",
+      "emoji_tematico": "🚽",
       "nombre_lugar": "Misión",
-      "apertura": "Conocimos @mision.ba, un bar con un ambiente increíble en Palermo donde la verdadera magia sucede... ¡en el baño! Porque sí, adentro hay un boliche completo con DJ, música y gente bailando en un lugar donde definitivamente no esperabas terminar la noche 🎶",
+      "apertura": "Conocimos @mision.ba, un bar con un ambiente increíble, muy buena comida y tragos… pero lo más insólito pasa cuando vas al baño. Porque sí, ¡hay un boliche adentro! Con DJ, música y gente bailando en un lugar donde definitivamente no esperabas terminar la noche 🕺",
+      "encabezado_comida": "Nosotros probamos:",
       "items_comida": [
         {
           "emoji": "🧀",
@@ -26,7 +27,7 @@
           "precio": "$27.000"
         },
         {
-          "emoji": "🫘",
+          "emoji": "🍖",
           "item": "Mollejas Teriyaki con papines andinos y puré de coliflor",
           "precio": "$29.000"
         },
@@ -37,21 +38,20 @@
         },
         {
           "emoji": "🥩",
-          "item": "Ojo de Bife con puré de batata y criolla",
+          "item": "Ojo de Bife con reducción de malbec, puré de batata y criolla",
           "precio": "$47.000"
         }
       ],
       "items_bebida": [
         {
-          "emoji": "🍸",
+          "emoji": "🍹",
           "item": "Tragos de autor",
-          "precio": "desde $22.000"
+          "precio": "$22.000"
         }
       ],
       "postre": null,
       "datos": [
-        "Abre para cenar y después sube la música para bailar en la noche.",
-        "El boliche funciona adentro del baño con DJ en vivo."
+        "Después de la cena sube la música, aparece la DJ y podés terminar la noche bailando en el baño."
       ],
       "ideal_para": [
         "citas",
@@ -59,13 +59,13 @@
       ],
       "direccion": "Godoy Cruz 1715, Palermo",
       "cierre_emoji": "💬",
-      "cierre_pregunta": "¿Con quién irías a Misión para terminar bailando en el baño?",
+      "cierre_pregunta": "¿Con quién irías a terminar la noche en Misión?",
       "hashtags": [
         "#BaresCopados",
-        "#BolicheSorpresa",
-        "#Palermo",
-        "#Cocteleria",
-        "#CenaYBaile"
+        "#BarOculto",
+        "#Coctelería",
+        "#Citas",
+        "#BuenosAires"
       ],
       "advertencias": null
     },
@@ -79,7 +79,7 @@
         "detalle": {
           "type": "web_fetch_result",
           "url": "https://queresto.com/misionbar",
-          "retrieved_at": "2026-09-09T00:54:37.578087",
+          "retrieved_at": "2026-09-09T00:54:37.578000+00:00",
           "content": {
             "type": "document",
             "source": {
@@ -94,14 +94,14 @@
     ],
     "modelo": "claude-haiku-4-5",
     "usage": {
-      "input_tokens": 788,
-      "cache_creation_input_tokens": 12733,
-      "cache_read_input_tokens": 5086,
+      "input_tokens": 821,
+      "cache_creation_input_tokens": 14177,
+      "cache_read_input_tokens": 6497,
       "cache_creation": {
-        "ephemeral_5m_input_tokens": 12733,
+        "ephemeral_5m_input_tokens": 14177,
         "ephemeral_1h_input_tokens": 0
       },
-      "output_tokens": 545,
+      "output_tokens": 512,
       "service_tier": "standard",
       "inference_geo": "not_available",
       "server_tool_use": {
@@ -110,9 +110,9 @@
       }
     },
     "costo": {
-      "costoInputUSD": 0.017213,
-      "costoOutputUSD": 0.002725,
-      "costoTotalUSD": 0.019938
+      "costoInputUSD": 0.019192,
+      "costoOutputUSD": 0.00256,
+      "costoTotalUSD": 0.021752
     }
   }
 }
