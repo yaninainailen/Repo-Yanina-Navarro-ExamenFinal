@@ -80,6 +80,25 @@ clave nueva y actualizarla a mano en Vercel. El riesgo que se acepta a cambio (u
 indefinidamente si se filtrara) se mitiga porque nunca vive en el navegador ni en el repo, solo
 en la variable de entorno del backend — ver sección de Gobierno y riesgo.
 
+## Capítulo 7 — primer error real en producción: `web_fetch` + Haiku 4.5 (2026-09-08)
+
+Primera corrida real contra el sistema desplegado (caso Misión, modo Link) — falló con un 400:
+
+```
+'claude-haiku-4-5-20251001' does not support programmatic tool calling. The following
+tools have `allowed_callers` that require it: web_fetch. Explicitly set
+`allowed_callers=["direct"]` on these tools, or use a model that supports programmatic
+tool calling.
+```
+
+El error de la propia API decía la solución: había que agregar `allowed_callers: ["direct"]`
+a la definición de la herramienta `web_fetch` en `api/generar-copy.js`. Se corrigió ahí.
+
+De paso se encontró y arregló un bug del lado del frontend: `script.js` mostraba solo el
+mensaje genérico `data.error` y descartaba `data.detalle` (donde el backend sí manda el error
+real). Se corrigió para que el detalle completo aparezca en pantalla — así, si vuelve a fallar
+algo, no hace falta ir a mirar los Logs de Vercel para diagnosticarlo.
+
 ## Pendiente al momento de escribir esto (2026-09-08)
 
 - [ ] Elegir modelo con evidencia real: probar `claude-haiku-4-5` (el más barato) contra un

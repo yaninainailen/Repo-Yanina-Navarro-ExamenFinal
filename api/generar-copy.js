@@ -215,7 +215,12 @@ module.exports = async function handler(req, res) {
   }
 
   const usaMenuLink = datos.menuModo === "link" && datos.menuLink;
-  const tools = usaMenuLink ? [{ type: "web_fetch_20260209", name: "web_fetch" }] : undefined;
+  // allowed_callers: ["direct"] es obligatorio en Haiku 4.5 — sin esto, Claude devuelve 400
+  // porque interpreta que la herramienta necesita "programmatic tool calling" (no soportado
+  // en este modelo).
+  const tools = usaMenuLink
+    ? [{ type: "web_fetch_20260209", name: "web_fetch", allowed_callers: ["direct"] }]
+    : undefined;
 
   try {
     const response = await client.messages.create({

@@ -67,10 +67,17 @@ async function generarCopy(datos) {
     body: JSON.stringify(datos),
   });
 
-  const data = await res.json();
+  let data;
+  try {
+    data = await res.json();
+  } catch (e) {
+    throw new Error(`El servidor respondió con un error que no es JSON (HTTP ${res.status}). Revisá los Logs del proyecto en Vercel.`);
+  }
 
   if (!res.ok) {
-    throw new Error(data.error || `Error HTTP ${res.status}`);
+    const base = data.error || `Error HTTP ${res.status}`;
+    const detalle = data.detalle ? ` — ${typeof data.detalle === "string" ? data.detalle : JSON.stringify(data.detalle)}` : "";
+    throw new Error(`${base}${detalle}`);
   }
 
   return data;
